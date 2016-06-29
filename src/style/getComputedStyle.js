@@ -1,20 +1,5 @@
-import { camelize, hyphenate } from './utils/stringFormatter';
 
-const msPattern = /^ms-/;
-
-/**
- * https://github.com/facebook/react/blob/2aeb8a2a6beb00617a4217f7f8284924fa2ad819/src/vendor/core/camelizeStyleName.js
- */
-function camelizeStyleName(string) {
-    return camelize(string.replace(msPattern, 'ms-'));
-}
-
-
-function hyphenateStyleName(string) {
-    return hyphenate(string).replace(msPattern, '-ms-');
-}
-
-function _getComputedStyle(node) {
+export default function getComputedStyle(node) {
     if (!node) {
         throw new TypeError('No Element passed to `getComputedStyle()`');
     }
@@ -70,34 +55,4 @@ function _getComputedStyle(node) {
         }
     };
 
-}
-
-export function removeStyle(node, key) {
-    return ('removeProperty' in node.style) ? node.style.removeProperty(key) : node.style.removeAttribute(key);
-}
-
-export function addStyle(node, property, value) {
-    let css = '';
-    let props = property;
-
-    if (typeof property === 'string') {
-        if (value === undefined) {
-            return getStyle(node, property);
-        }
-        (props = {})[property] = value;
-    }
-
-    for (var key in props) {
-        if (Object.prototype.hasOwnProperty.call(props, key)) {
-            !props[key] && props[key] !== 0 ?
-                removeStyle(node, hyphenateStyleName(key))
-                : (css += hyphenateStyleName(key) + ':' + props[key] + ';');
-        }
-    }
-
-    node.style.cssText += ';' + css;
-}
-
-export function getStyle(node, property) {
-    return node.style[camelizeStyleName(property)] || _getComputedStyle(node).getPropertyValue(hyphenateStyleName(property));
 }

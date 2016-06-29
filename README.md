@@ -8,6 +8,13 @@ DOM helper library
 npm install dom-lib --save
 ```
 
+Example
+
+```js
+import { addClass } from 'dom-lib';
+
+```
+
 ## Documnets
 
 Class
