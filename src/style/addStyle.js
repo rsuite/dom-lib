@@ -1,7 +1,7 @@
-import hyphenateStyleName from './hyphenateStyleName';
-import removeStyle from './removeStyle';
+const  hyphenateStyleName = require('./hyphenateStyleName');
+const  removeStyle = require('./removeStyle');
 
-export default function addStyle(node, property, value) {
+module.exports =  function addStyle(node, property, value) {
     let css = '';
     let props = property;
 
@@ -21,4 +21,4 @@ export default function addStyle(node, property, value) {
     }
 
     node.style.cssText += ';' + css;
-}
+};

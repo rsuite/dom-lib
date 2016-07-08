@@ -1,7 +1,7 @@
-import { hyphenate } from '../utils/stringFormatter';
 
+const {hyphenate} = require('../utils/stringFormatter');
 const msPattern = /^ms-/;
 
-export default function hyphenateStyleName(string) {
+module.exports =  function hyphenateStyleName(string) {
     return hyphenate(string).replace(msPattern, '-ms-');
-}
+};

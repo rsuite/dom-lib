@@ -10,11 +10,12 @@ const eventPrefix = bind !== 'addEventListener' ? 'on' : '';
  * @param  {Boolean} capture
  * @return {Object}
  */
-export default function on(target, eventName, listener, capture = false) {
+module.exports =  function on(target, eventName, listener, capture = false) {
     target[bind](eventPrefix + eventName, listener, capture);
     return {
         off() {
             target[unbind](eventPrefix + eventName, listener, capture);
         }
     };
-}
+};
+

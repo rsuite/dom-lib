@@ -1,5 +1,5 @@
 
-export default function getComputedStyle(node) {
+module.exports =  function getComputedStyle(node) {
     if (!node) {
         throw new TypeError('No Element passed to `getComputedStyle()`');
     }
@@ -55,4 +55,4 @@ export default function getComputedStyle(node) {
         }
     };
 
-}
+};

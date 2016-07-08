@@ -1,6 +1,7 @@
-import hasClass from './hasClass';
 
-export function addClass(target, className) {
+const hasClass = require('./hasClass');
+
+module.exports = function addClass(target, className) {
     if (className) {
         if (target.classList) {
             target.classList.add(className);
@@ -9,4 +10,4 @@ export function addClass(target, className) {
         }
     }
     return target;
-}
+};

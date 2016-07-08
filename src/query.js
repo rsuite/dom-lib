@@ -1,35 +1,36 @@
-import ReactDOM from 'react-dom';
-import { getStyle } from './style';
+const ReactDOM  = require('react-dom');
+const { getStyle }  = require('./style');
 
-export function ownerDocument(componentOrElement) {
+
+function ownerDocument(componentOrElement) {
     let node = ReactDOM.findDOMNode(componentOrElement);
     return (node && node.ownerDocument) || document;
 }
 
-export function ownerWindow(componentOrElement) {
+function ownerWindow(componentOrElement) {
     let doc = ownerDocument(componentOrElement);
     return doc && doc.defaultView || doc.parentWindow;
 }
 
-export function getWindow(node) {
+function getWindow(node) {
     return node === node.window ?
         node : node.nodeType === 9 ?
         node.defaultView || node.parentWindow : false;
 }
 
-export function getContainer(container, defaultContainer) {
+function getContainer(container, defaultContainer) {
     container = typeof container === 'function' ? container() : container;
     return ReactDOM.findDOMNode(container) || defaultContainer;
 }
 
-export const canUseDOM = !!(
+const canUseDOM = !!(
     typeof window !== 'undefined' &&
     window.document &&
     window.document.createElement
 );
 
 
-export const contains = (function() {
+const contains = (function() {
     var root = canUseDOM && document.documentElement;
 
     return (root && root.contains) ?
@@ -50,12 +51,12 @@ export const contains = (function() {
         };
 })();
 
-export function nodeName(node) {
+function nodeName(node) {
     return node.nodeName && node.nodeName.toLowerCase();
 }
 
 
-export function scrollTop(node, val) {
+function scrollTop(node, val) {
     let win = getWindow(node);
     let top = win ? (('pageYOffset' in win) ? win.pageYOffset : win.document.documentElement.scrollTop) : node.scrollTop;
     let left = win ? (('pageXOffset' in win) ? win.pageXOffset : win.document.documentElement.scrollLeft) : 0;
@@ -68,7 +69,7 @@ export function scrollTop(node, val) {
 }
 
 
-export function scrollLeft(node, val) {
+function scrollLeft(node, val) {
 
     let win = getWindow(node);
     let left = win ? (('pageXOffset' in win) ? win.pageXOffset : win.document.documentElement.scrollLeft) : node.scrollLeft;
@@ -81,7 +82,7 @@ export function scrollLeft(node, val) {
     win ? win.scrollTo(val, top) : node.scrollLeft = val;
 }
 
-export function getOffset(node) {
+function getOffset(node) {
     let doc = ownerDocument(node);
     let win = getWindow(doc);
     let docElem = doc && doc.documentElement;
@@ -118,7 +119,7 @@ export function getOffset(node) {
     return box;
 }
 
-export function getOffsetParent(node) {
+function getOffsetParent(node) {
     let doc = ownerDocument(node),
         offsetParent = node && node.offsetParent;
 
@@ -130,7 +131,7 @@ export function getOffsetParent(node) {
 }
 
 
-export function getPosition(node, _offsetParent) {
+function getPosition(node, _offsetParent) {
     var _parentOffset = {
             top: 0,
             left: 0
@@ -163,7 +164,7 @@ export function getPosition(node, _offsetParent) {
 }
 
 
-export function isOverflowing(container) {
+function isOverflowing(container) {
     let win = getWindow(container);
     let isBody = container && container.tagName.toLowerCase() === 'body';
 
@@ -183,11 +184,11 @@ export function isOverflowing(container) {
     return win || isBody ? bodyIsOverflowing(container) : container.scrollHeight > container.clientHeight;
 }
 
-export function activeElement(doc = document) {
+function activeElement(doc = document) {
     return doc.activeElement;
 }
 
-export function getScrollbarSize(recalc) {
+function getScrollbarSize(recalc) {
     let size;
     if (!size || recalc) {
         if (canUseDOM) {
@@ -208,12 +209,33 @@ export function getScrollbarSize(recalc) {
     return size;
 }
 
-export function getHeight(node, client) {
+function getHeight(node, client) {
     var win = getWindow(node);
     return win ? win.innerHeight : client ? node.clientHeight : getOffset(node).height;
 }
 
-export function getWidth(node, client) {
+function getWidth(node, client) {
     var win = getWindow(node);
     return win ? win.innerWidth : client ? node.clientWidth : getOffset(node).width;
 }
+
+
+module.exports = {
+    ownerDocument,
+    ownerWindow,
+    getWindow,
+    getContainer,
+    canUseDOM,
+    contains,
+    nodeName,
+    scrollTop,
+    scrollLeft,
+    getOffset,
+    getOffsetParent,
+    getPosition,
+    isOverflowing,
+    activeElement,
+    getScrollbarSize,
+    getHeight,
+    getWidth
+};

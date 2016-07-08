@@ -1,7 +1,7 @@
-import camelizeStyleName from './camelizeStyleName';
-import getComputedStyle from './getComputedStyle';
-import hyphenateStyleName from './hyphenateStyleName';
+const camelizeStyleName = require('./camelizeStyleName');
+const getComputedStyle = require('./getComputedStyle');
+const hyphenateStyleName = require('./hyphenateStyleName');
 
-export default function getStyle(node, property) {
+module.exports =  function getStyle(node, property) {
     return node.style[camelizeStyleName(property)] || getComputedStyle(node).getPropertyValue(hyphenateStyleName(property));
-}
+};

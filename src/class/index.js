@@ -1,3 +1,5 @@
-export * from './addClass';
-export * from './hasClass';
-export * from './removeClass';
+module.exports = {
+    addClass: require('./addClass'),
+    hasClass: require('./hasClass'),
+    removeClass: require('./removeClass')
+};

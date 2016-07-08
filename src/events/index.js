@@ -1,3 +1,6 @@
-export on from './on';
-export off from './off';
-export onFocus from './onFocus';
+
+module.exports = {
+    on: require('./on'),
+    off: require('./off'),
+    onFocus: require('./off')
+};

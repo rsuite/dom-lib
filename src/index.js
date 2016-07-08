@@ -1,5 +1,16 @@
-export * from './class';
-export * from './style';
-export * from './query';
-export * from './events';
-export transition from './transition';
+
+const className  = require('./class');
+const style  = require('./style');
+const query  = require('./query');
+const events  = require('./events');
+const transition  = require('./transition');
+
+
+
+module.exports = {
+    ...className,
+    ...style,
+    ...query,
+    ...events,
+    transition: transition
+};

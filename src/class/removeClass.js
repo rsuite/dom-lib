@@ -1,4 +1,4 @@
-export function removeClass(target, className) {
+module.exports =  function removeClass(target, className) {
     if (className) {
         if (target.classList) {
             target.classList.remove(className);
@@ -10,4 +10,4 @@ export function removeClass(target, className) {
         }
     }
     return target;
-}
+};

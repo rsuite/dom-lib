@@ -48,7 +48,7 @@ function getTransitionProperties() {
     return {end: endEvent, prefix};
 }
 
-export default {
+module.exports =  {
     transform,
     end : transition.end,
     property : transitionProperty,

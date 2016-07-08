@@ -1,9 +1,10 @@
+
 /**
  * @example
  * underscoreName('getList');
  * => get_list
  */
-export function underscore(string) {
+function underscore(string) {
     return string.replace(/([A-Z])/g, '_$1').toLowerCase();
 }
 
@@ -13,7 +14,7 @@ export function underscore(string) {
  * camelize('font-size');
  * => fontSize
  */
-export function camelize(string) {
+function camelize(string) {
     return string.replace(/\-(\w)/g, function (char) {
         return char.slice(1).toUpperCase();
     });
@@ -24,8 +25,8 @@ export function camelize(string) {
  * camelize('fontSize');
  * => font-size
  */
-export function hyphenate(string) {
-  return string.replace(/([A-Z])/g, '-$1').toLowerCase();
+function hyphenate(string) {
+    return string.replace(/([A-Z])/g, '-$1').toLowerCase();
 }
 
 
@@ -34,7 +35,7 @@ export function hyphenate(string) {
  * merge('{0} - A front-end {1} ','Suite','framework');
  * => Suite - A front-end framework
  */
-export function merge(pattern) {
+function merge(pattern) {
     var pointer = 0,
         i;
     for (i = 1; i < arguments.length; i++) {
@@ -43,3 +44,11 @@ export function merge(pattern) {
     }
     return pattern;
 }
+
+module.exports = {
+    underscore,
+    camelize,
+    hyphenate,
+    merge
+};
+
