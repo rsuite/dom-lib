@@ -1,3 +1,5 @@
+const hasClass = require('./hasClass');
+
 module.exports =  function removeClass(target, className) {
     if (className) {
         if (target.classList) {
