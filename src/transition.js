@@ -6,7 +6,8 @@ var has = Object.prototype.hasOwnProperty,
     transitionTiming,
     transitionDuration,
     transitionProperty,
-    transitionDelay;
+    transitionDelay,
+    backfaceVisibility;
 
 if (canUseDOM) {
     transition = getTransitionProperties();
@@ -17,6 +18,7 @@ if (canUseDOM) {
     transitionDuration = transition.prefix + 'transition-duration';
     transitionDelay = transition.prefix + 'transition-delay';
     transitionTiming = transition.prefix + 'transition-timing-function';
+    backfaceVisibility = transition.prefix + 'backface-visibility';
 }
 
 function getTransitionProperties() {
@@ -49,6 +51,7 @@ function getTransitionProperties() {
 }
 
 module.exports =  {
+    backfaceVisibility,
     transform,
     end : transition.end,
     property : transitionProperty,
