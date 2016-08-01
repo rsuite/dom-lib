@@ -8,7 +8,7 @@ class DOMMouseMoveTracker {
      * onMove is the callback that will be called on every mouse move.
      * onMoveEnd is called on mouse up when movement has ended.
      */
-    constructor( onMove, onMoveEnd, domNode) {
+    constructor(onMove, onMoveEnd, domNode) {
         this._isDragging = false;
         this._animationFrameID = null;
         this._domNode = domNode;
@@ -104,12 +104,13 @@ class DOMMouseMoveTracker {
 
         this._x = x;
         this._y = y;
+        this._moveEvent = event;
         event.preventDefault();
     }
 
     _didMouseMove() {
         this._animationFrameID = null;
-        this._onMove(this._deltaX, this._deltaY);
+        this._onMove(this._deltaX, this._deltaY, this._moveEvent);
         this._deltaX = 0;
         this._deltaY = 0;
     }
