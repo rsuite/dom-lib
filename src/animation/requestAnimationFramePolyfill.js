@@ -8,7 +8,7 @@ var lastTime = 0;
  * Please don't use it directly and use requestAnimationFrame module instead.
  */
 var requestAnimationFrame =
-    nativeRequestAnimationFrame ||
+    (nativeRequestAnimationFrame && nativeRequestAnimationFrame.bind(global))  ||
     function (callback) {
         var currTime = Date.now();
         var timeDelay = Math.max(0, 16 - (currTime - lastTime));

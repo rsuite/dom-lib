@@ -5,4 +5,4 @@ var nativeRequestAnimationFrame =
     global.oRequestAnimationFrame ||
     global.msRequestAnimationFrame;
 
-module.exports = nativeRequestAnimationFrame.bind(global);
+module.exports = nativeRequestAnimationFrame;
