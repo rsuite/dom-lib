@@ -4,8 +4,7 @@ const removeClass = require('./removeClass');
 
 module.exports = function toggleClass(target, className) {
     if (hasClass(target, className)) {
-        removeClass(target, className);
-        return;
+        return removeClass(target, className);
     }
-    addClass(target, className);
+    return addClass(target, className);
 };
