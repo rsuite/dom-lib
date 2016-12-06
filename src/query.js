@@ -144,11 +144,11 @@ function getPosition(node, _offsetParent) {
         _offset = node.getBoundingClientRect();
     } else {
 
-        _offsetParent = _offsetParent || offsetParent(node);
-        _offset = offset(node);
+        _offsetParent = _offsetParent || getOffsetParent(node);
+        _offset = getOffset(node);
 
         if (nodeName(_offsetParent) !== 'html') {
-            _parentOffset = offset(_offsetParent);
+            _parentOffset = getOffset(_offsetParent);
         }
 
         _parentOffset.top += (parseInt(getStyle(_offsetParent, 'borderTopWidth'), 10) - scrollTop(_offsetParent)) || 0;
@@ -157,7 +157,7 @@ function getPosition(node, _offsetParent) {
 
     // Subtract parent offsets and node margins
     return {
-        ...offset,
+        ..._offset,
         top: _offset.top - _parentOffset.top - (parseInt(getStyle(node, 'marginTop'), 10) || 0),
         left: _offset.left - _parentOffset.left - (parseInt(getStyle(node, 'marginLeft'), 10) || 0)
     };
