@@ -11,8 +11,8 @@
     "dev": "webpack --progress -colors --watch",
     "test": "karma start"
   },
-  "dependencies": {
-    "react-dom": "^0.14.2"
+  "peerDependencies": {
+    "react-dom": "0.14.x || ^15.0.0"
   },
   "author": "",
   "license": "MIT",
@@ -60,6 +60,7 @@
     "react-hot-loader": "^1.3.0",
     "react-router": "^2.4.1",
     "rimraf": "^2.5.2",
+    "react-dom": "^15.0.0",
     "style-loader": "^0.13.1",
     "webpack-dev-server": "^1.14.1"
   }

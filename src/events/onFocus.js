@@ -14,4 +14,4 @@ module.exports = function onFocus(listener) {
     return {
         off
     };
-}
+};

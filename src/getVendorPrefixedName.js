@@ -1,5 +1,5 @@
 import { canUseDOM } from './query';
-import {camelize} from './utils/stringFormatter';
+import { camelize } from './utils/stringFormatter';
 
 let memoized = {};
 let prefixes = ['Webkit', 'ms', 'Moz', 'O'];
