@@ -1,6 +1,6 @@
 {
   "name": "dom-lib",
-  "version": "0.0.16",
+  "version": "0.1.1",
   "description": "DOM helper library",
   "main": "lib/index.js",
   "directories": {
@@ -14,12 +14,16 @@
   "peerDependencies": {
     "react-dom": "0.14.x || ^15.0.0"
   },
-  "author": "",
+  "author": "Simon Guo <simonguo.2009@gmail.com>",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git@github.com:suitejs/dom-lib.git"
+    "url": "git@github.com:rsuite/dom-lib.git"
   },
+  "files": [
+    "CHANGELOG.md",
+    "lib"
+  ],
   "devDependencies": {
     "babel-core": "^6.7.6",
     "babel-loader": "^6.2.4",
