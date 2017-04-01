@@ -4,7 +4,7 @@
  * underscoreName('getList');
  * => get_list
  */
-function underscore(string) {
+export function underscore(string) {
     return string.replace(/([A-Z])/g, '_$1').toLowerCase();
 }
 
@@ -14,7 +14,7 @@ function underscore(string) {
  * camelize('font-size');
  * => fontSize
  */
-function camelize(string) {
+export function camelize(string) {
     return string.replace(/\-(\w)/g, function (char) {
         return char.slice(1).toUpperCase();
     });
@@ -25,7 +25,7 @@ function camelize(string) {
  * camelize('fontSize');
  * => font-size
  */
-function hyphenate(string) {
+export function hyphenate(string) {
     return string.replace(/([A-Z])/g, '-$1').toLowerCase();
 }
 
@@ -35,7 +35,7 @@ function hyphenate(string) {
  * merge('{0} - A front-end {1} ','Suite','framework');
  * => Suite - A front-end framework
  */
-function merge(pattern) {
+export function merge(pattern) {
     var pointer = 0,
         i;
     for (i = 1; i < arguments.length; i++) {
@@ -44,11 +44,3 @@ function merge(pattern) {
     }
     return pattern;
 }
-
-module.exports = {
-    underscore,
-    camelize,
-    hyphenate,
-    merge
-};
-

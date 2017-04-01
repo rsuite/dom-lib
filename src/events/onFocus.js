@@ -1,5 +1,5 @@
 
-module.exports = function onFocus(listener) {
+export default (listener) => {
     let useFocusin = !document.addEventListener;
     let off;
 

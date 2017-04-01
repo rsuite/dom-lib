@@ -1,7 +1,6 @@
+import hasClass from './hasClass';
 
-const hasClass = require('./hasClass');
-
-module.exports = function addClass(target, className) {
+export default  (target, className) => {
     if (className) {
         if (target.classList) {
             target.classList.add(className);

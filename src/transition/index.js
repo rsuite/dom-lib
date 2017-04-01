@@ -1,6 +1,6 @@
-import { canUseDOM } from './query';
+import { canUseDOM } from '../query';
 
-var has = Object.prototype.hasOwnProperty,
+let has = Object.prototype.hasOwnProperty,
     transform = 'transform',
     transition = {},
     transitionTiming,
@@ -22,7 +22,7 @@ if (canUseDOM) {
 }
 
 function getTransitionProperties() {
-    var endEvent,
+    let endEvent,
         prefix = '',
         transitions = {
             O: 'otransitionend',
@@ -31,9 +31,9 @@ function getTransitionProperties() {
             ms: 'MSTransitionEnd'
         };
 
-    var element = document.createElement('div');
+    const element = document.createElement('div');
 
-    for (var vendor in transitions) {
+    for (let vendor in transitions) {
         if (has.call(transitions, vendor)) {
             if (element.style[vendor + 'TransitionProperty'] !== undefined) {
                 prefix = '-' + vendor.toLowerCase() + '-';
@@ -47,15 +47,19 @@ function getTransitionProperties() {
         endEvent = 'transitionend';
     }
 
-    return {end: endEvent, prefix};
+    return {
+        end: endEvent,
+        prefix
+    };
 }
 
-module.exports =  {
+
+export default {
     backfaceVisibility,
     transform,
-    end : transition.end,
-    property : transitionProperty,
-    timing : transitionTiming,
-    delay : transitionDelay,
-    duration : transitionDuration
+    end: transition.end,
+    property: transitionProperty,
+    timing: transitionTiming,
+    delay: transitionDelay,
+    duration: transitionDuration
 };

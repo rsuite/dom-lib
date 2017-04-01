@@ -11,6 +11,7 @@ const eventPrefix = bind !== 'addEventListener' ? 'on' : '';
  * @param {Boolean} capture
  * @api public
  */
-module.exports = function off(target, eventName, listener, capture = false) {
+
+export default (target, eventName, listener, capture = false) => {
     target[unbind](eventPrefix + eventName, listener, capture);
 };

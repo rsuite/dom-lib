@@ -1,6 +1,6 @@
-const  { camelize } = require('../utils/stringFormatter');
+import { camelize } from '../utils/stringFormatter';
 const msPattern = /^ms-/;
 
-module.exports =  function camelizeStyleName(string) {
+export default (string) =>{
     return camelize(string.replace(msPattern, 'ms-'));
 };

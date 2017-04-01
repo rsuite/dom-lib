@@ -1,6 +1,6 @@
-const hasClass = require('./hasClass');
+import hasClass from './hasClass';
 
-module.exports =  function removeClass(target, className) {
+export default  (target, className) => {
     if (className) {
         if (target.classList) {
             target.classList.remove(className);

@@ -36,4 +36,4 @@ function getVendorPrefixedName(property) {
     return memoized[name];
 }
 
-module.exports = getVendorPrefixedName;
+export default getVendorPrefixedName;

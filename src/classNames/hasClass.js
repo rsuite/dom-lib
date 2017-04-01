@@ -1,4 +1,4 @@
-module.exports = function hasClass(target, className) {
+export default  (target, className) => {
     if (target.classList) {
         return !!className && target.classList.contains(className);
     }

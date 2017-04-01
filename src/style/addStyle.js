@@ -1,7 +1,7 @@
-const  hyphenateStyleName = require('./hyphenateStyleName');
-const  removeStyle = require('./removeStyle');
+import hyphenateStyleName from './hyphenateStyleName';
+import removeStyle from './removeStyle';
 
-module.exports =  function addStyle(node, property, value) {
+export default (node, property, value) =>{
     let css = '';
     let props = property;
 

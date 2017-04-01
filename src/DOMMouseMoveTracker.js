@@ -1,7 +1,6 @@
-var on = require('./events/on');
-var cancelAnimationFramePolyfill = require('./animation/cancelAnimationFramePolyfill');
-var requestAnimationFramePolyfill = require('./animation/requestAnimationFramePolyfill');
-
+import { on } from './events';
+import cancelAnimationFramePolyfill from './animation/cancelAnimationFramePolyfill';
+import requestAnimationFramePolyfill from './animation/requestAnimationFramePolyfill';
 
 class DOMMouseMoveTracker {
     /**
@@ -126,4 +125,4 @@ class DOMMouseMoveTracker {
     }
 }
 
-module.exports = DOMMouseMoveTracker;
+export default DOMMouseMoveTracker;

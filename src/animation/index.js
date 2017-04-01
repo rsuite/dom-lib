@@ -1,5 +1,3 @@
-module.exports = {
-    cancelAnimationFramePolyfill: require('./cancelAnimationFramePolyfill'),
-    nativeRequestAnimationFrame: require('./nativeRequestAnimationFrame'),
-    requestAnimationFramePolyfill: require('./requestAnimationFramePolyfill')
-};
+export cancelAnimationFramePolyfill from './cancelAnimationFramePolyfill';
+export nativeRequestAnimationFrame from './nativeRequestAnimationFrame';
+export requestAnimationFramePolyfill from './requestAnimationFramePolyfill';
