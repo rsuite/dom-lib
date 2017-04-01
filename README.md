@@ -1,4 +1,4 @@
-# dom-lib
+# dom-lib   [![Travis][build-badge]][build] [![npm][npm-badge]][npm]
 
 DOM helper library
 
@@ -62,3 +62,9 @@ removeStyle(node, property)
 addStyle(node, property, value)
 ```
 
+
+[build-badge]: https://travis-ci.org/rsuite/dom-lib.svg?branch=master
+[build]: https://travis-ci.org/rsuite/dom-lib
+
+[npm-badge]: https://badge.fury.io/js/dom-lib.svg
+[npm]: http://badge.fury.io/js/dom-lib
