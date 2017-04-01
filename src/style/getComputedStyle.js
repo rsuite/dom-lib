@@ -1,4 +1,7 @@
 
+/**
+ * gives the final used values of all the CSS properties of an element.
+ */
 module.exports =  function getComputedStyle(node) {
     if (!node) {
         throw new TypeError('No Element passed to `getComputedStyle()`');
