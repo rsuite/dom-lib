@@ -9,7 +9,9 @@
   "scripts": {
     "build": "rm -rf lib && babel src --out-dir lib",
     "dev": "webpack --progress -colors --watch",
-    "test": "karma start"
+    "tdd": "karma start",
+    "lint": "eslint src  *.js",
+    "test": "npm run lint &&  karma start --single-run"
   },
   "peerDependencies": {
     "react-dom": "0.14.x || ^15.0.0"
@@ -53,6 +55,7 @@
     "karma-webpack": "^1.7.0",
     "mocha": "^3.2.0",
     "react-dom": "^15.0.0",
+    "sinon": "^2.1.0",
     "sinon-chai": "^2.9.0",
     "style-loader": "^0.13.1",
     "webpack": "^2.3.2",
