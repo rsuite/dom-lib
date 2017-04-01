@@ -13,9 +13,6 @@
     "lint": "eslint src  *.js",
     "test": "npm run lint &&  karma start --single-run"
   },
-  "peerDependencies": {
-    "react-dom": "0.14.x || ^15.0.0"
-  },
   "author": "Simon Guo <simonguo.2009@gmail.com>",
   "license": "MIT",
   "repository": {
@@ -28,6 +25,7 @@
   ],
   "devDependencies": {
     "babel-core": "^6.7.6",
+    "babel-eslint": "^7.2.1",
     "babel-loader": "^6.2.4",
     "babel-plugin-transform-es2015-classes": "^6.14.0",
     "babel-plugin-transform-proto-to-assign": "^6.9.0",
@@ -55,6 +53,7 @@
     "karma-webpack": "^1.7.0",
     "mocha": "^3.2.0",
     "react-dom": "^15.0.0",
+    "simulant": "^0.2.2",
     "sinon": "^2.1.0",
     "sinon-chai": "^2.9.0",
     "style-loader": "^0.13.1",

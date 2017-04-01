@@ -1,7 +1,7 @@
-import { getStyle, removeStyle, addStyle, getComputedStyle } from '../src/style';
+import { getStyle, removeStyle, addStyle, getComputedStyle } from '../src';
 
 
-describe('Style helpers', () => {
+describe('Style', () => {
 
     beforeEach(() => {
         document.body.innerHTML = window.__html__['test/html/style.html'];
@@ -19,9 +19,6 @@ describe('Style helpers', () => {
         expect(style.color).to.contain('rgb(255, 0, 0)');
         expect(style.marginLeft).to.contain('1px');
     });
-
-
-
 
     it('should add style', () => {
         let el = document.getElementById('case-2');

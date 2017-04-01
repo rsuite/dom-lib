@@ -3,7 +3,10 @@
         "browser": true,
         "es6": true
     },
+    "parser": "babel-eslint",
     "plugins": [
+        "react",
+        "babel"
     ],
     "parserOptions": {
         "ecmaVersion": 6,
@@ -14,14 +17,20 @@
         }
     },
     "rules": {
-        "camelcase": 2,
-        "curly": 2,
-        "eqeqeq": 2,
-        "brace-style": [2, "1tbs"],
-        "quotes": [2, "single"],
-        "semi": [2, "always"],
-        "space-infix-ops": 2,
-        "no-param-reassign": 0,
-        "prefer-spread": 2
+        "indent": [2, 4, {"SwitchCase": 1}],    //规定代码的缩进方式：4个空格
+        "camelcase": 2,                         //强制驼峰法命名
+        "curly": 2,                             //必须使用 if(){} 中的{}
+        "eqeqeq": 2,                            //必须使用全等
+        "brace-style": [2, "1tbs"],             //大括号风格
+        "quotes": [2, "single"],                //引号类型
+        "semi": [2, "always"],                  //语句强制分号结尾
+        "space-infix-ops": 2,                   //中缀操作符周围要不要有空格
+        "no-param-reassign": 0,                 //不允许对函数的形参进行赋值
+        "prefer-spread": 2,                     //首选展开运算
+        "comma-dangle":0,                       //不允许或强制在对象字面量或者数组属性的结尾使用逗号
+        "padded-blocks":0,                      //规定代码块前后是否要加空行
+        "prefer-const":0,
+        "no-var":0,
+        "one-var":0
     }
 }

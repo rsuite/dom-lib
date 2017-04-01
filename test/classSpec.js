@@ -1,7 +1,7 @@
-import { addClass, hasClass, removeClass , toggleClass} from '../src/class';
+import { addClass, hasClass, removeClass , toggleClass} from '../src';
 
 
-describe('Class helpers', () => {
+describe('Class', () => {
 
     beforeEach(() => {
         document.body.innerHTML = window.__html__['test/html/class.html'];
