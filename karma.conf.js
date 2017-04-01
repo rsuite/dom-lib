@@ -15,7 +15,7 @@ module.exports = function (config) {
 
         logLevel: config.LOG_INFO,
 
-        browsers: ['Chrome'],
+        browsers: env.BROWSER ? env.BROWSER.split(',') : ['Chrome'],
 
         preprocessors: {
             'test/html/*.html': 'html2js',
