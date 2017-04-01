@@ -1,4 +1,5 @@
 module.exports = function (config) {
+    const { env } = process;
     config.set({
         basePath: '',
         frameworks: ['mocha', 'sinon-chai'],
@@ -11,12 +12,14 @@ module.exports = function (config) {
         port: 9876,
         colors: true,
         autoWatch: true,
-        singleRun: false,
-
         logLevel: config.LOG_INFO,
-
         browsers: env.BROWSER ? env.BROWSER.split(',') : ['Chrome'],
-
+        customLaunchers: {
+            ChromeCi: {
+                base: 'Chrome',
+                flags: ['--no-sandbox'],
+            },
+        },
         preprocessors: {
             'test/html/*.html': 'html2js',
             'test/index.js': ['webpack', 'sourcemap']
