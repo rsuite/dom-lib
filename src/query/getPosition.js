@@ -1,7 +1,9 @@
 import getOffsetParent from './getOffsetParent';
+import getOffset from './getOffset';
 import { getStyle } from '../style';
 import scrollTop from './scrollTop';
 import scrollLeft from './scrollLeft';
+import nodeName from './nodeName';
 
 export default (node, offsetParent) => {
     let parentOffset = {
@@ -26,6 +28,7 @@ export default (node, offsetParent) => {
         parentOffset.top += (parseInt(getStyle(offsetParent, 'borderTopWidth'), 10) - scrollTop(offsetParent)) || 0;
         parentOffset.left += (parseInt(getStyle(offsetParent, 'borderLeftWidth'), 10) - scrollLeft(offsetParent)) || 0;
     }
+
 
     // Subtract parent offsets and node margins
     return {
