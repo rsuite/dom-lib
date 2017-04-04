@@ -8,7 +8,7 @@ DOM helper library
 npm install dom-lib --save
 ```
 
-示例
+## 示例
 
 ```js
 import { addClass } from 'dom-lib';
@@ -65,6 +65,7 @@ String getWindow(Element node)
 String nodeName(Element node)
 Object ownerDocument(Element componentOrElement)
 Object ownerWindow(Element componentOrElement)
+Boolean contains(Element context, Element node)
 void scrollLeft(Element node, Number val)
 void scrollTop(Element node, Number val)
 ```
