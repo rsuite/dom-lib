@@ -39,12 +39,20 @@ describe('Query', () => {
     it('should handle scroll position', () => {
         let el = document.getElementById('case-4');
         lib.scrollTop(el, 100);
-        lib.scrollLeft(el,200);
+        lib.scrollLeft(el, 200);
 
         expect(100).to.equal($('#case-4').scrollTop());
         expect(200).to.equal($('#case-4').scrollLeft());
+    });
 
 
+    it('should check for contained element', () => {
+        let el4 = document.getElementById('case-4');
+        let el5 = document.getElementById('case-5');
+        let el6 = document.getElementById('case-6');
+
+        expect(lib.contains(el5, el4)).to.equal(false);
+        expect(lib.contains(el5, el6)).to.equal(true);
     });
 
 });
