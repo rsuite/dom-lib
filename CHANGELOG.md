@@ -1,6 +1,7 @@
-# 0.2.0  next
+# 0.2.0
 
-- add test case;
+- All changes to support es2015
+- Added test case
 
 
 # 0.1.1
