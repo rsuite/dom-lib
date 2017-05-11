@@ -5,7 +5,7 @@
  * => get_list
  */
 export function underscore(string) {
-    return string.replace(/([A-Z])/g, '_$1').toLowerCase();
+  return string.replace(/([A-Z])/g, '_$1').toLowerCase();
 }
 
 
@@ -15,9 +15,9 @@ export function underscore(string) {
  * => fontSize
  */
 export function camelize(string) {
-    return string.replace(/\-(\w)/g, function (char) {
-        return char.slice(1).toUpperCase();
-    });
+  return string.replace(/\-(\w)/g, function (char) {
+    return char.slice(1).toUpperCase();
+  });
 }
 
 /**
@@ -26,7 +26,7 @@ export function camelize(string) {
  * => font-size
  */
 export function hyphenate(string) {
-    return string.replace(/([A-Z])/g, '-$1').toLowerCase();
+  return string.replace(/([A-Z])/g, '-$1').toLowerCase();
 }
 
 
@@ -36,11 +36,11 @@ export function hyphenate(string) {
  * => Suite - A front-end framework
  */
 export function merge(pattern) {
-    var pointer = 0,
-        i;
-    for (i = 1; i < arguments.length; i++) {
-        pattern = pattern.split('{' + pointer + '}').join(arguments[i]);
-        pointer++;
-    }
-    return pattern;
+  var pointer = 0,
+    i;
+  for (i = 1; i < arguments.length; i++) {
+    pattern = pattern.split('{' + pointer + '}').join(arguments[i]);
+    pointer++;
+  }
+  return pattern;
 }

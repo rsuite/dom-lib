@@ -7,13 +7,13 @@ let prefixRegex = new RegExp('^(' + prefixes.join('|') + ')');
 let testStyle = canUseDOM ? document.createElement('div').style : {};
 
 function getWithPrefix(name) {
-    for (let i = 0; i < prefixes.length; i++) {
-        let prefixedName = prefixes[i] + name;
-        if (prefixedName in testStyle) {
-            return prefixedName;
-        }
+  for (let i = 0; i < prefixes.length; i++) {
+    let prefixedName = prefixes[i] + name;
+    if (prefixedName in testStyle) {
+      return prefixedName;
     }
-    return null;
+  }
+  return null;
 }
 
 /**
@@ -22,18 +22,18 @@ function getWithPrefix(name) {
  * supported.
  */
 function getVendorPrefixedName(property) {
-    let name = camelize(property);
-    if (memoized[name] === undefined) {
-        let capitalizedName = name.charAt(0).toUpperCase() + name.slice(1);
-        if (prefixRegex.test(capitalizedName)) {
-            throw new Error(
-                'getVendorPrefixedName must only be called with unprefixed' +
-                'CSS property names. It was called with %s', property
-            );
-        }
-        memoized[name] = (name in testStyle) ? name : getWithPrefix(capitalizedName);
+  let name = camelize(property);
+  if (memoized[name] === undefined) {
+    let capitalizedName = name.charAt(0).toUpperCase() + name.slice(1);
+    if (prefixRegex.test(capitalizedName)) {
+      throw new Error(
+        'getVendorPrefixedName must only be called with unprefixed' +
+        'CSS property names. It was called with %s', property
+      );
     }
-    return memoized[name];
+    memoized[name] = (name in testStyle) ? name : getWithPrefix(capitalizedName);
+  }
+  return memoized[name];
 }
 
 export default getVendorPrefixedName;

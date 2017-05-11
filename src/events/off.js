@@ -13,5 +13,5 @@ const eventPrefix = bind !== 'addEventListener' ? 'on' : '';
  */
 
 export default (target, eventName, listener, capture = false) => {
-    target[unbind](eventPrefix + eventName, listener, capture);
+  target[unbind](eventPrefix + eventName, listener, capture);
 };

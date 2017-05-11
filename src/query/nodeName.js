@@ -1,3 +1,3 @@
 export default (node) => {
-    return node.nodeName && node.nodeName.toLowerCase();
+  return node.nodeName && node.nodeName.toLowerCase();
 };

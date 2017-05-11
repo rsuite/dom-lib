@@ -1,3 +1,3 @@
 export default (node) => {
-    return (node && node.ownerDocument) || document;
+  return (node && node.ownerDocument) || document;
 };

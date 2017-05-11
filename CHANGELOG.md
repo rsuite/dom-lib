@@ -1,3 +1,9 @@
+# 0.2.1
+
+- Added `throttle` and `debounce`
+- Change `space` to 2
+
+
 # 0.2.0
 
 - All changes to support es2015
