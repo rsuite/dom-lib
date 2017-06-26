@@ -1,6 +1,6 @@
 
 import nativeRequestAnimationFrame from './nativeRequestAnimationFrame';
-const emptyFunction = function () { };
+import emptyFunction from '../utils/emptyFunction';
 let lastTime = 0;
 
 /**
