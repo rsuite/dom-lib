@@ -12,10 +12,18 @@ function normalizeWheel(event) {
     pX = 0, pY = 0;       // pixelX, pixelY
 
   // Legacy
-  if ('detail' in event) { sY = event.detail; }
-  if ('wheelDelta' in event) { sY = -event.wheelDelta / 120; }
-  if ('wheelDeltaY' in event) { sY = -event.wheelDeltaY / 120; }
-  if ('wheelDeltaX' in event) { sX = -event.wheelDeltaX / 120; }
+  if ('detail' in event) {
+    sY = event.detail;
+  }
+  if ('wheelDelta' in event) {
+    sY = -event.wheelDelta / 120;
+  }
+  if ('wheelDeltaY' in event) {
+    sY = -event.wheelDeltaY / 120;
+  }
+  if ('wheelDeltaX' in event) {
+    sX = -event.wheelDeltaX / 120;
+  }
 
   // side scrolling on FF with DOMMouseScroll
   if ('axis' in event && event.axis === event.HORIZONTAL_AXIS) {
@@ -34,7 +42,7 @@ function normalizeWheel(event) {
   }
 
   if ((pX || pY) && event.deltaMode) {
-    if (event.deltaMode == 1) {          // delta in LINE units
+    if (event.deltaMode === 1) {          // delta in LINE units
       pX *= LINE_HEIGHT;
       pY *= LINE_HEIGHT;
     } else {                             // delta in PAGE units
@@ -44,8 +52,12 @@ function normalizeWheel(event) {
   }
 
   // Fall-back if spin cannot be determined
-  if (pX && !sX) { sX = (pX < 1) ? -1 : 1; }
-  if (pY && !sY) { sY = (pY < 1) ? -1 : 1; }
+  if (pX && !sX) {
+    sX = (pX < 1) ? -1 : 1;
+  }
+  if (pY && !sY) {
+    sY = (pY < 1) ? -1 : 1;
+  }
 
   return {
     spinX: sX,
