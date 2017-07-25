@@ -9,55 +9,70 @@ let has = Object.prototype.hasOwnProperty,
   transitionDelay,
   backfaceVisibility;
 
+let prefix, transitionEnd;
+
 if (canUseDOM) {
   transition = getTransitionProperties();
+  ({ prefix, transitionEnd } = getTransitionProperties());
 
-  transform = transition.prefix + transform;
-
-  transitionProperty = transition.prefix + 'transition-property';
-  transitionDuration = transition.prefix + 'transition-duration';
-  transitionDelay = transition.prefix + 'transition-delay';
-  transitionTiming = transition.prefix + 'transition-timing-function';
-  backfaceVisibility = transition.prefix + 'backface-visibility';
+  transform = `${prefix}-${transform}`;
+  transitionProperty = `${prefix}-transition-property`;
+  transitionDuration = `${prefix}-transition-duration`;
+  transitionDelay = `${prefix}-transition-delay`;
+  transitionTiming = `${prefix}-transition-timing-function`;
+  backfaceVisibility = `${prefix}-backface-visibility`;
 }
 
 function getTransitionProperties() {
-  let endEvent,
-    prefix = '',
-    transitions = {
-      O: 'otransitionend',
-      Moz: 'transitionend',
-      Webkit: 'webkitTransitionEnd',
-      ms: 'MSTransitionEnd'
-    };
+  let style = document.createElement('div').style;
 
-  const element = document.createElement('div');
+  let vendorMap = {
+    O: e => `o${e.toLowerCase()}`,
+    Moz: e => e.toLowerCase(),
+    Webkit: e => `webkit${e}`,
+    ms: e => `MS${e}`,
+  };
 
-  for (let vendor in transitions) {
-    if (has.call(transitions, vendor)) {
-      if (element.style[vendor + 'TransitionProperty'] !== undefined) {
-        prefix = '-' + vendor.toLowerCase() + '-';
-        endEvent = transitions[vendor];
-        break;
-      }
+  let vendors = Object.keys(vendorMap);
+  let transitionEnd, animationEnd;
+  let prefix = '';
+
+  for (let i = 0; i < vendors.length; i++) {
+    let vendor = vendors[i];
+
+    if (`${vendor}TransitionProperty` in style) {
+      prefix = `-${vendor.toLowerCase()}`;
+
+      console.log(prefix);
+      transitionEnd = vendorMap[vendor]('TransitionEnd');
+      animationEnd = vendorMap[vendor]('AnimationEnd');
+      break;
     }
   }
 
-  if (!endEvent && element.style.transitionProperty !== undefined) {
-    endEvent = 'transitionend';
+  if (!transitionEnd && 'transitionProperty' in style) {
+    transitionEnd = 'transitionend';
   }
 
+
+  if (!animationEnd && 'animationName' in style) {
+    animationEnd = 'animationend';
+  }
+
+
+  style = null;
+
   return {
-    end: endEvent,
+    animationEnd,
+    transitionEnd,
     prefix
   };
 }
 
-
 export default {
   backfaceVisibility,
   transform,
-  end: transition.end,
+  end: transitionEnd,
   property: transitionProperty,
   timing: transitionTiming,
   delay: transitionDelay,

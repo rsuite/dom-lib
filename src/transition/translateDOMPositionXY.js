@@ -1,10 +1,9 @@
 import transition from './index';
-import camelize from '../utils/camelize';
 import BrowserSupportCore from '../BrowserSupportCore';
+import getVendorPrefixedName from '../getVendorPrefixedName';
 
-const TRANSFORM = camelize(transition.transform);
-const BACKFACE_VISIBILITY = camelize(transition.backfaceVisibility);
-
+const TRANSFORM = getVendorPrefixedName('transform');
+const BACKFACE_VISIBILITY = getVendorPrefixedName('backfaceVisibility');
 
 const translateDOMPositionXY = (function () {
   if (BrowserSupportCore.hasCSSTransforms()) {
@@ -16,13 +15,13 @@ const translateDOMPositionXY = (function () {
     // (see bug https://bugs.webkit.org/show_bug.cgi?id=61824).
     // Use 2D translation instead.
     if (!isSafari && BrowserSupportCore.hasCSS3DTransforms()) {
-      return function (style, x, y) {
-        style[TRANSFORM] = 'translate3d(' + x + 'px,' + y + 'px,0)';
+      return function (style, x = 0, y = 0) {
+        style[TRANSFORM] = `translate3d(${x}px,${y}px,0)`;
         style[BACKFACE_VISIBILITY] = 'hidden';
       };
     } else {
-      return function (style, x, y) {
-        style[TRANSFORM] = 'translate(' + x + 'px,' + y + 'px)';
+      return function (style, x = 0, y = 0) {
+        style[TRANSFORM] = `translate(${x}px,${y}px)`;
       };
     }
   } else {
