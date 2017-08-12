@@ -42,8 +42,6 @@ function getTransitionProperties() {
 
     if (`${vendor}TransitionProperty` in style) {
       prefix = `-${vendor.toLowerCase()}`;
-
-      console.log(prefix);
       transitionEnd = vendorMap[vendor]('TransitionEnd');
       animationEnd = vendorMap[vendor]('AnimationEnd');
       break;

@@ -10,6 +10,7 @@ export default (node, offsetParent) => {
     top: 0,
     left: 0
   };
+
   let offset;
 
   // Fixed elements are offset from window (parentOffset = {top:0, left: 0},
@@ -22,7 +23,9 @@ export default (node, offsetParent) => {
     offset = getOffset(node);
 
     if (nodeName(offsetParent) !== 'html') {
-      parentOffset = getOffset(offsetParent);
+      let nextParentOffset = getOffset(offsetParent);
+      parentOffset.top = nextParentOffset.top;
+      parentOffset.left = nextParentOffset.left;
     }
 
     parentOffset.top += (parseInt(getStyle(offsetParent, 'borderTopWidth'), 10) - scrollTop(offsetParent)) || 0;
