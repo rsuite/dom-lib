@@ -1,3 +1,3 @@
-export default (node) => {
-  return (node && node.ownerDocument) || document;
-};
+// @flow
+
+export default (node: HTMLElement): Document => (node && node.ownerDocument) || document;

@@ -1,13 +1,10 @@
-module.exports = function (config) {
+module.exports = config => {
   const { env } = process;
   config.set({
     basePath: '',
     frameworks: ['mocha', 'sinon-chai'],
     reporters: ['mocha'],
-    files: [
-      'test/html/*.html',
-      'test/index.js'
-    ],
+    files: ['test/html/*.html', 'test/index.js'],
 
     port: 9876,
     colors: true,
@@ -17,8 +14,8 @@ module.exports = function (config) {
     customLaunchers: {
       ChromeCi: {
         base: 'Chrome',
-        flags: ['--no-sandbox'],
-      },
+        flags: ['--no-sandbox']
+      }
     },
     preprocessors: {
       'test/html/*.html': 'html2js',
@@ -33,9 +30,7 @@ module.exports = function (config) {
         rules: [
           {
             test: /.js$/,
-            use: [
-              'babel-loader?babelrc'
-            ],
+            use: ['babel-loader?babelrc'],
             exclude: /node_modules/
           }
         ]
@@ -45,6 +40,5 @@ module.exports = function (config) {
     webpackServer: {
       noInfo: true
     }
-
   });
 };

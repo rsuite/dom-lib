@@ -1,4 +1,4 @@
-# dom-lib   [![Travis][build-badge]][build] [![npm][npm-badge]][npm]
+# dom-lib [![Travis][build-badge]][build] [![npm][npm-badge]][npm]
 
 DOM helper library
 
@@ -12,68 +12,68 @@ npm install dom-lib --save
 
 ```js
 import { addClass } from 'dom-lib';
-
 ```
 
 ## API
 
 Class
 
-```js
-void hasClass(Element node, String className)
-void addClass(Element node, String className)
-void removeClass(Element node, String className)
-void toggleClass(Element node, String className)
+```typescript
+hasClass: (node: HTMLElement, className: string) => boolean;
+addClass: (node: HTMLElement, className: string) => HTMLElement;
+removeClass: (node: HTMLElement, className: string) => HTMLElement;
+toggleClass: (node: HTMLElement, className: string) => HTMLElement;
 ```
-
 
 Style
 
-```js
-String getStyle(Element node, String property)
-Object getStyle(Element node)
-String getComputedStyle(Element node, String property)
-Object getComputedStyle(Element node)
+```typescript
+getStyle: (node: HTMLElement, property: string) => string;
+getStyle: (node: HTMLElement) => Object;
 
-void removeStyle(Element node, String property)
-void removeStyle(Element node, Array propertys)
-void addStyle(Element node, String property, String value)
-void addStyle(Element node, Object style)
+removeStyle: (node: HTMLElement, property: string) => void;
+removeStyle: (node: HTMLElement, propertys: Array<string>) => void;
+
+addStyle: (node: HTMLElement, property: string, value: string) => void;
+addStyle: (node: HTMLElement, style: Object) => void;
 ```
-
 
 Events
 
-```js
-Function  on(Element target, String eventName, Function listener, Boolean capture = false)
-Function  onFocus()
-void off(Element target, String eventName, Function listener, Boolean capture = false)
+```typescript
+on: (target: HTMLElement, eventName: string, listener: Function, capture: boolean = false) => {
+  off: Function;
+};
+off: (target: HTMLElement, eventName: string, listener: Function, capture: boolean = false) =>
+  void;
 ```
-> on 和 onFocus 方法将返回一个 off 函数， 用于方便解绑事件
-
 
 Query
 
-```js
-Element activeElement()
-Number getHeight(Element node, client)
-Number getWidth(Element node, client)
-Object getOffset(Element node)
-Object getOffsetParent(Element node)
-Object getPosition(Element node, offsetParent)
-String getWindow(Element node)
-String nodeName(Element node)
-Object ownerDocument(Element componentOrElement)
-Object ownerWindow(Element componentOrElement)
-Boolean contains(Element context, Element node)
-void scrollLeft(Element node, Number val)
-void scrollTop(Element node, Number val)
+```typescript
+activeElement: () => HTMLElement;
+getHeight: (node: HTMLElement, client: HTMLElement) => number;
+getWidth: (node: HTMLElement, client: HTMLElement) => number;
+getOffset: (node: HTMLElement) => Object;
+getOffsetParent: (node: HTMLElement) => Object;
+getPosition: (node: HTMLElement, offsetParent) => Object;
+getWindow: (node: HTMLElement) => String;
+nodeName: (node: HTMLElement) => String;
+ownerDocument: (node: HTMLElement) => Object;
+ownerWindow: (node: HTMLElement) => Object;
+contains: (context: HTMLElement, node: HTMLElement) => boolean;
+scrollLeft: (node: HTMLElement) => number;
+scrollTop: (node: HTMLElement) => number;
 ```
 
+Utils
 
+```typescript
+scrollLeft: (node: HTMLElement, val: number) => void;
+scrollTop: (node: HTMLElement, val: number) => void;
+```
 
 [build-badge]: https://travis-ci.org/rsuite/dom-lib.svg?branch=master
 [build]: https://travis-ci.org/rsuite/dom-lib
-
 [npm-badge]: https://badge.fury.io/js/dom-lib.svg
 [npm]: http://badge.fury.io/js/dom-lib

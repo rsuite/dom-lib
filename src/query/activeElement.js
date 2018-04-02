@@ -1,4 +1,3 @@
+// @flow
 
-export default (doc = document) => {
-  return doc.activeElement;
-};
+export default (doc: Document = document): null | HTMLElement => doc.activeElement;

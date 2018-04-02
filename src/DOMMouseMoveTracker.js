@@ -1,21 +1,31 @@
-import { on } from './events';
+// @flow
+
+import on from './events/on';
 import cancelAnimationFramePolyfill from './animation/cancelAnimationFramePolyfill';
 import requestAnimationFramePolyfill from './animation/requestAnimationFramePolyfill';
 
 class DOMMouseMoveTracker {
+  isDraggingStatus = false;
+  animationFrameID = null;
+  domNode: HTMLElement;
+  onMove: Function;
+  onMoveEnd: Function;
+  eventMoveToken = null;
+  eventUpToken = null;
+  moveEvent = null;
+  deltaX = 0;
+  deltaY = 0;
+  x: number = 0;
+  y: number = 0;
+
   /**
    * onMove is the callback that will be called on every mouse move.
    * onMoveEnd is called on mouse up when movement has ended.
    */
-  constructor(onMove, onMoveEnd, domNode) {
-    this._isDragging = false;
-    this._animationFrameID = null;
-    this._domNode = domNode;
-    this._onMove = onMove;
-    this._onMoveEnd = onMoveEnd;
-    this._onMouseMove = this._onMouseMove.bind(this);
-    this._onMouseUp = this._onMouseUp.bind(this);
-    this._didMouseMove = this._didMouseMove.bind(this);
+  constructor(onMove: Function, onMoveEnd: Function, domNode: HTMLElement) {
+    this.domNode = domNode;
+    this.onMove = onMove;
+    this.onMoveEnd = onMoveEnd;
   }
 
   /**
@@ -24,27 +34,18 @@ class DOMMouseMoveTracker {
    * listeners are added at the document.body level. It takes in an event
    * in order to grab inital state.
    */
-  captureMouseMoves(event) {
-
-    if (!this._eventMoveToken && !this._eventUpToken) {
-      this._eventMoveToken = on(
-        this._domNode,
-        'mousemove',
-        this._onMouseMove
-      );
-      this._eventUpToken = on(
-        this._domNode,
-        'mouseup',
-        this._onMouseUp
-      );
+  captureMouseMoves(event: Object) {
+    if (!this.eventMoveToken && !this.eventUpToken) {
+      this.eventMoveToken = on(this.domNode, 'mousemove', this.onMouseMove);
+      this.eventUpToken = on(this.domNode, 'mouseup', this.onMouseUp);
     }
 
-    if (!this._isDragging) {
-      this._deltaX = 0;
-      this._deltaY = 0;
-      this._isDragging = true;
-      this._x = event.clientX;
-      this._y = event.clientY;
+    if (!this.isDraggingStatus) {
+      this.deltaX = 0;
+      this.deltaY = 0;
+      this.isDraggingStatus = true;
+      this.x = event.clientX;
+      this.y = event.clientY;
     }
 
     event.preventDefault();
@@ -54,75 +55,72 @@ class DOMMouseMoveTracker {
    * These releases all of the listeners on document.body.
    */
   releaseMouseMoves() {
-
-
-    if (this._eventMoveToken && this._eventUpToken) {
-
-      this._eventMoveToken.off();
-      this._eventMoveToken = null;
-      this._eventUpToken.off();
-      this._eventUpToken = null;
-
+    if (this.eventMoveToken) {
+      this.eventMoveToken.off();
+      this.eventMoveToken = null;
     }
 
-    if (this._animationFrameID !== null) {
-      cancelAnimationFramePolyfill(this._animationFrameID);
-      this._animationFrameID = null;
+    if (this.eventUpToken) {
+      this.eventUpToken.off();
+      this.eventUpToken = null;
     }
 
-    if (this._isDragging) {
-      this._isDragging = false;
-      this._x = null;
-      this._y = null;
+    if (this.animationFrameID !== null) {
+      cancelAnimationFramePolyfill(this.animationFrameID);
+      this.animationFrameID = null;
+    }
+
+    if (this.isDraggingStatus) {
+      this.isDraggingStatus = false;
+      this.x = 0;
+      this.y = 0;
     }
   }
 
   /**
    * Returns whether or not if the mouse movement is being tracked.
    */
-  isDragging() /*boolean*/ {
-    return this._isDragging;
-  }
+  isDragging = () => this.isDraggingStatus;
 
   /**
    * Calls onMove passed into constructor and updates internal state.
    */
-  _onMouseMove(/*object*/ event) {
+  onMouseMove = (event: Object) => {
+    let x: number = event.clientX;
+    let y = event.clientY;
 
-    var x = event.clientX;
-    var y = event.clientY;
+    this.deltaX += x - this.x;
+    this.deltaY += y - this.y;
 
-    this._deltaX += (x - this._x);
-    this._deltaY += (y - this._y);
-
-    if (this._animationFrameID === null) {
+    if (this.animationFrameID === null) {
       // The mouse may move faster then the animation frame does.
       // Use `requestAnimationFramePolyfill` to avoid over-updating.
-      this._animationFrameID = requestAnimationFramePolyfill(this._didMouseMove);
+      this.animationFrameID = requestAnimationFramePolyfill(this.didMouseMove);
     }
 
-    this._x = x;
-    this._y = y;
-    this._moveEvent = event;
-    event.preventDefault();
-  }
+    this.x = x;
+    this.y = y;
 
-  _didMouseMove() {
-    this._animationFrameID = null;
-    this._onMove(this._deltaX, this._deltaY, this._moveEvent);
-    this._deltaX = 0;
-    this._deltaY = 0;
-  }
+    this.moveEvent = event;
+    event.preventDefault();
+  };
+
+  didMouseMove = () => {
+    this.animationFrameID = null;
+    this.onMove(this.deltaX, this.deltaY, this.moveEvent);
+
+    this.deltaX = 0;
+    this.deltaY = 0;
+  };
   /**
    * Calls onMoveEnd passed into constructor and updates internal state.
    */
-  _onMouseUp() {
-
-    if (this._animationFrameID) {
-      this._didMouseMove();
+  onMouseUp = () => {
+    if (this.animationFrameID) {
+      this.didMouseMove();
     }
-    this._onMoveEnd();
-  }
+    this.onMoveEnd && this.onMoveEnd();
+  };
 }
 
 export default DOMMouseMoveTracker;

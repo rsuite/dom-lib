@@ -1,110 +1,127 @@
-
-var _populated = false;
+let populated = false;
 
 // Browsers
-var _ie, _firefox, _opera, _webkit, _chrome;
+let ie;
+let firefox;
+let opera;
+let webkit;
+let chrome;
 
 // Actual IE browser for compatibility mode
-var _ieRealVersion;
+let ieRealVersion;
 
 // Platforms
-var _osx, _windows, _linux, _android;
+let osx;
+let windows;
+let linux;
+let android;
 
 // Architectures
-var _win64;
+let win64;
 
 // Devices
-var _iphone, _ipad, _native;
+let iphone;
+let ipad;
+let native;
 
-var _mobile;
+let mobile;
 
-function _populate() {
-  if (_populated) {
+function populate() {
+  if (populated) {
     return;
   }
 
-  _populated = true;
+  populated = true;
 
   // To work around buggy JS libraries that can't handle multi-digit
   // version numbers, Opera 10's user agent string claims it's Opera
   // 9, then later includes a Version/X.Y field:
   //
   // Opera/9.80 (foo) Presto/2.2.15 Version/10.10
-  var uas = navigator.userAgent;
-  var agent = /(?:MSIE.(\d+\.\d+))|(?:(?:Firefox|GranParadiso|Iceweasel).(\d+\.\d+))|(?:Opera(?:.+Version.|.)(\d+\.\d+))|(?:AppleWebKit.(\d+(?:\.\d+)?))|(?:Trident\/\d+\.\d+.*rv:(\d+\.\d+))/.exec(uas);
-  var os = /(Mac OS X)|(Windows)|(Linux)/.exec(uas);
+  let uas = navigator.userAgent;
+  let agent = /(?:MSIE.(\d+\.\d+))|(?:(?:Firefox|GranParadiso|Iceweasel).(\d+\.\d+))|(?:Opera(?:.+Version.|.)(\d+\.\d+))|(?:AppleWebKit.(\d+(?:\.\d+)?))|(?:Trident\/\d+\.\d+.*rv:(\d+\.\d+))/.exec(
+    uas
+  );
+  let os = /(Mac OS X)|(Windows)|(Linux)/.exec(uas);
 
-  _iphone = /\b(iPhone|iP[ao]d)/.exec(uas);
-  _ipad = /\b(iP[ao]d)/.exec(uas);
-  _android = /Android/i.exec(uas);
-  _native = /FBAN\/\w+;/i.exec(uas);
-  _mobile = /Mobile/i.exec(uas);
+  iphone = /\b(iPhone|iP[ao]d)/.exec(uas);
+  ipad = /\b(iP[ao]d)/.exec(uas);
+  android = /Android/i.exec(uas);
+  native = /FBAN\/\w+;/i.exec(uas);
+  mobile = /Mobile/i.exec(uas);
 
   // Note that the IE team blog would have you believe you should be checking
   // for 'Win64; x64'.  But MSDN then reveals that you can actually be coming
   // from either x64 or ia64;  so ultimately, you should just check for Win64
   // as in indicator of whether you're in 64-bit IE.  32-bit IE on 64-bit
   // Windows will send 'WOW64' instead.
-  _win64 = !!(/Win64/.exec(uas));
+  win64 = !!/Win64/.exec(uas);
 
   if (agent) {
-    _ie = agent[1] ? parseFloat(agent[1]) : (
-      agent[5] ? parseFloat(agent[5]) : NaN);
+    if (agent[1]) {
+      ie = parseFloat(agent[1]);
+    } else {
+      ie = agent[5] ? parseFloat(agent[5]) : NaN;
+    }
+
     // IE compatibility mode
-    if (_ie && document && document.documentMode) {
-      _ie = document.documentMode;
+    if (ie && document && document.documentMode) {
+      ie = document.documentMode;
     }
     // grab the "true" ie version from the trident token if available
-    var trident = /(?:Trident\/(\d+.\d+))/.exec(uas);
-    _ieRealVersion = trident ? parseFloat(trident[1]) + 4 : _ie;
+    let trident = /(?:Trident\/(\d+.\d+))/.exec(uas);
+    ieRealVersion = trident ? parseFloat(trident[1]) + 4 : ie;
 
-    _firefox = agent[2] ? parseFloat(agent[2]) : NaN;
-    _opera = agent[3] ? parseFloat(agent[3]) : NaN;
-    _webkit = agent[4] ? parseFloat(agent[4]) : NaN;
-    if (_webkit) {
+    firefox = agent[2] ? parseFloat(agent[2]) : NaN;
+    opera = agent[3] ? parseFloat(agent[3]) : NaN;
+    webkit = agent[4] ? parseFloat(agent[4]) : NaN;
+    if (webkit) {
       // We do not add the regexp to the above test, because it will always
       // match 'safari' only since 'AppleWebKit' appears before 'Chrome' in
       // the userAgent string.
       agent = /(?:Chrome\/(\d+\.\d+))/.exec(uas);
-      _chrome = agent && agent[1] ? parseFloat(agent[1]) : NaN;
+      chrome = agent && agent[1] ? parseFloat(agent[1]) : NaN;
     } else {
-      _chrome = NaN;
+      chrome = NaN;
     }
   } else {
-    _ie = _firefox = _opera = _chrome = _webkit = NaN;
+    ie = NaN;
+    firefox = NaN;
+    opera = NaN;
+    chrome = NaN;
+    webkit = NaN;
   }
 
   if (os) {
     if (os[1]) {
-      // Detect OS X version.  If no version number matches, set _osx to true.
+      // Detect OS X version.  If no version number matches, set osx to true.
       // Version examples:  10, 10_6_1, 10.7
       // Parses version number as a float, taking only first two sets of
       // digits.  If only one set of digits is found, returns just the major
       // version number.
-      var ver = /(?:Mac OS X (\d+(?:[._]\d+)?))/.exec(uas);
+      let ver = /(?:Mac OS X (\d+(?:[._]\d+)?))/.exec(uas);
 
-      _osx = ver ? parseFloat(ver[1].replace('_', '.')) : true;
+      osx = ver ? parseFloat(ver[1].replace('_', '.')) : true;
     } else {
-      _osx = false;
+      osx = false;
     }
-    _windows = !!os[2];
-    _linux = !!os[3];
+    windows = !!os[2];
+    linux = !!os[3];
   } else {
-    _osx = _windows = _linux = false;
+    osx = false;
+    windows = false;
+    linux = false;
   }
 }
 
-var UserAgent = {
-
+const UserAgent = {
   /**
    *  Check if the UA is Internet Explorer.
    *
    *
    *  @return float|NaN Version number (if match) or NaN.
    */
-  ie: function () {
-    return _populate() || _ie;
-  },
+  ie: (): boolean => populate() || ie,
 
   /**
    * Check if we're in Internet Explorer compatibility mode.
@@ -112,19 +129,14 @@ var UserAgent = {
    * @return bool true if in compatibility mode, false if
    * not compatibility mode or not ie
    */
-  ieCompatibilityMode: function () {
-    return _populate() || (_ieRealVersion > _ie);
-  },
-
+  ieCompatibilityMode: (): boolean => populate() || ieRealVersion > ie,
 
   /**
    * Whether the browser is 64-bit IE.  Really, this is kind of weak sauce;  we
    * only need this because Skype can't handle 64-bit IE yet.  We need to remove
    * this when we don't need it -- tracked by #601957.
    */
-  ie64: function () {
-    return UserAgent.ie() && _win64;
-  },
+  ie64: (): boolean => UserAgent.ie() && win64,
 
   /**
    *  Check if the UA is Firefox.
@@ -132,10 +144,7 @@ var UserAgent = {
    *
    *  @return float|NaN Version number (if match) or NaN.
    */
-  firefox: function () {
-    return _populate() || _firefox;
-  },
-
+  firefox: (): boolean => populate() || firefox,
 
   /**
    *  Check if the UA is Opera.
@@ -143,10 +152,7 @@ var UserAgent = {
    *
    *  @return float|NaN Version number (if match) or NaN.
    */
-  opera: function () {
-    return _populate() || _opera;
-  },
-
+  opera: (): boolean => populate() || opera,
 
   /**
    *  Check if the UA is WebKit.
@@ -154,17 +160,13 @@ var UserAgent = {
    *
    *  @return float|NaN Version number (if match) or NaN.
    */
-  webkit: function () {
-    return _populate() || _webkit;
-  },
+  webkit: (): boolean => populate() || webkit,
 
   /**
    *  For Push
    *  WILL BE REMOVED VERY SOON. Use UserAgent_DEPRECATED.webkit
    */
-  safari: function () {
-    return UserAgent.webkit();
-  },
+  safari: (): boolean => UserAgent.webkit(),
 
   /**
    *  Check if the UA is a Chrome browser.
@@ -172,20 +174,14 @@ var UserAgent = {
    *
    *  @return float|NaN Version number (if match) or NaN.
    */
-  chrome: function () {
-    return _populate() || _chrome;
-  },
-
+  chrome: (): boolean => populate() || chrome,
 
   /**
    *  Check if the user is running Windows.
    *
    *  @return bool `true' if the user's OS is Windows.
    */
-  windows: function () {
-    return _populate() || _windows;
-  },
-
+  windows: (): boolean => populate() || windows,
 
   /**
    *  Check if the user is running Mac OS X.
@@ -193,18 +189,14 @@ var UserAgent = {
    *  @return float|bool   Returns a float if a version number is detected,
    *                       otherwise true/false.
    */
-  osx: function () {
-    return _populate() || _osx;
-  },
+  osx: (): boolean => populate() || osx,
 
   /**
    * Check if the user is running Linux.
    *
    * @return bool `true' if the user's OS is some flavor of Linux.
    */
-  linux: function () {
-    return _populate() || _linux;
-  },
+  linux: (): boolean => populate() || linux,
 
   /**
    * Check if the user is running on an iPhone or iPod platform.
@@ -212,26 +204,13 @@ var UserAgent = {
    * @return bool `true' if the user is running some flavor of the
    *    iPhone OS.
    */
-  iphone: function () {
-    return _populate() || _iphone;
-  },
+  iphone: (): boolean => populate() || iphone,
+  mobile: (): boolean => populate() || (iphone || ipad || android || mobile),
 
-  mobile: function () {
-    return _populate() || (_iphone || _ipad || _android || _mobile);
-  },
-
-  nativeApp: function () {
-    // webviews inside of the native apps
-    return _populate() || _native;
-  },
-
-  android: function () {
-    return _populate() || _android;
-  },
-
-  ipad: function () {
-    return _populate() || _ipad;
-  }
+  // webviews inside of the native apps
+  nativeApp: (): boolean => populate() || native,
+  android: (): boolean => populate() || android,
+  ipad: (): boolean => populate() || ipad
 };
 
 export default UserAgent;

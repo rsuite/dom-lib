@@ -3,70 +3,69 @@ import normalizeWheel from './normalizeWheel';
 import requestAnimationFramePolyfill from './animation/requestAnimationFramePolyfill';
 
 class WheelHandler {
-
   constructor(onWheel, handleScrollX, handleScrollY, stopPropagation) {
-    this._animationFrameID = null;
-    this._deltaX = 0;
-    this._deltaY = 0;
-    this._didWheel = this._didWheel.bind(this);
+    this.animationFrameID = null;
+    this.deltaX = 0;
+    this.deltaY = 0;
+    this.didWheel = this.didWheel.bind(this);
 
     if (typeof handleScrollX !== 'function') {
-      handleScrollX = handleScrollX ?
-        emptyFunction.thatReturnsTrue :
-        emptyFunction.thatReturnsFalse;
+      handleScrollX = handleScrollX
+        ? emptyFunction.thatReturnsTrue
+        : emptyFunction.thatReturnsFalse;
     }
 
     if (typeof handleScrollY !== 'function') {
-      handleScrollY = handleScrollY ?
-        emptyFunction.thatReturnsTrue :
-        emptyFunction.thatReturnsFalse;
+      handleScrollY = handleScrollY
+        ? emptyFunction.thatReturnsTrue
+        : emptyFunction.thatReturnsFalse;
     }
 
     if (typeof stopPropagation !== 'function') {
-      stopPropagation = stopPropagation ?
-        emptyFunction.thatReturnsTrue :
-        emptyFunction.thatReturnsFalse;
+      stopPropagation = stopPropagation
+        ? emptyFunction.thatReturnsTrue
+        : emptyFunction.thatReturnsFalse;
     }
 
-    this._handleScrollX = handleScrollX;
-    this._handleScrollY = handleScrollY;
-    this._stopPropagation = stopPropagation;
-    this._onWheelCallback = onWheel;
+    this.handleScrollX = handleScrollX;
+    this.handleScrollY = handleScrollY;
+    this.stopPropagation = stopPropagation;
+    this.onWheelCallback = onWheel;
     this.onWheel = this.onWheel.bind(this);
   }
 
   onWheel(event) {
-    var normalizedEvent = normalizeWheel(event);
-    var deltaX = this._deltaX + normalizedEvent.pixelX;
-    var deltaY = this._deltaY + normalizedEvent.pixelY;
-    var handleScrollX = this._handleScrollX(deltaX, deltaY);
-    var handleScrollY = this._handleScrollY(deltaY, deltaX);
+    let normalizedEvent = normalizeWheel(event);
+    let deltaX = this.deltaX + normalizedEvent.pixelX;
+    let deltaY = this.deltaY + normalizedEvent.pixelY;
+    let handleScrollX = this.handleScrollX(deltaX, deltaY);
+    let handleScrollY = this.handleScrollY(deltaY, deltaX);
     if (!handleScrollX && !handleScrollY) {
       return;
     }
 
-    this._deltaX += handleScrollX ? normalizedEvent.pixelX : 0;
-    this._deltaY += handleScrollY ? normalizedEvent.pixelY : 0;
+    this.deltaX += handleScrollX ? normalizedEvent.pixelX : 0;
+    this.deltaY += handleScrollY ? normalizedEvent.pixelY : 0;
     event.preventDefault();
 
-    var changed;
-    if (this._deltaX !== 0 || this._deltaY !== 0) {
-      if (this._stopPropagation()) {
+    let changed;
+    if (this.deltaX !== 0 || this.deltaY !== 0) {
+      if (this.stopPropagation()) {
         event.stopPropagation();
       }
       changed = true;
     }
 
-    if (changed === true && this._animationFrameID === null) {
-      this._animationFrameID = requestAnimationFramePolyfill(this._didWheel);
+    if (changed === true && this.animationFrameID === null) {
+      this.animationFrameID = requestAnimationFramePolyfill(this.didWheel);
     }
   }
 
-  _didWheel() {
-    this._animationFrameID = null;
-    this._onWheelCallback(this._deltaX, this._deltaY);
-    this._deltaX = 0;
-    this._deltaY = 0;
+  didWheel() {
+    this.animationFrameID = null;
+    this.onWheelCallback(this.deltaX, this.deltaY);
+    this.deltaX = 0;
+    this.deltaY = 0;
   }
 }
 

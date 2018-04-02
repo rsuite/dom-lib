@@ -1,5 +1,8 @@
+// @flow
+
 import ownerDocument from './ownerDocument';
-export default (componentOrElement) => {
-  let doc = ownerDocument(componentOrElement);
-  return doc && doc.defaultView || doc.parentWindow;
+
+export default (componentOrElement: HTMLElement): window => {
+  const doc = ownerDocument(componentOrElement);
+  return doc.defaultView;
 };

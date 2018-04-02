@@ -1,16 +1,13 @@
 {
-    "presets": [
-        "stage-0",
-        "react",
-        "es2015"
-    ],
-    "plugins": [
-        "transform-proto-to-assign",
-        [
-            "transform-es2015-classes",
-            {
-                "loose": true
-            }
-        ]
+  "presets": ["env", "react", "stage-0"],
+  "plugins": [
+    "transform-proto-to-assign",
+    "transform-class-properties",
+    [
+      "transform-es2015-classes",
+      {
+        "loose": true
+      }
     ]
+  ]
 }

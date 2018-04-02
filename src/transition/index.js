@@ -1,78 +1,55 @@
 import { canUseDOM } from '../query';
 
-let has = Object.prototype.hasOwnProperty,
-  transform = 'transform',
-  transition = {},
-  transitionTiming,
-  transitionDuration,
-  transitionProperty,
-  transitionDelay,
-  backfaceVisibility;
-
-let prefix, transitionEnd;
-
-if (canUseDOM) {
-  transition = getTransitionProperties();
-  ({ prefix, transitionEnd } = getTransitionProperties());
-
-  transform = `${prefix}-${transform}`;
-  transitionProperty = `${prefix}-transition-property`;
-  transitionDuration = `${prefix}-transition-duration`;
-  transitionDelay = `${prefix}-transition-delay`;
-  transitionTiming = `${prefix}-transition-timing-function`;
-  backfaceVisibility = `${prefix}-backface-visibility`;
-}
-
 function getTransitionProperties() {
-  let style = document.createElement('div').style;
+  if (!canUseDOM) {
+    return null;
+  }
 
-  let vendorMap = {
+  const vendorMap = {
     O: e => `o${e.toLowerCase()}`,
     Moz: e => e.toLowerCase(),
     Webkit: e => `webkit${e}`,
-    ms: e => `MS${e}`,
+    ms: e => `MS${e}`
   };
 
-  let vendors = Object.keys(vendorMap);
-  let transitionEnd, animationEnd;
-  let prefix = '';
+  const vendors = Object.keys(vendorMap);
 
-  for (let i = 0; i < vendors.length; i++) {
+  let style = document.createElement('div').style;
+
+  let tempTransitionEnd;
+  let tempPrefix = '';
+
+  for (let i = 0; i < vendors.length; i += 1) {
     let vendor = vendors[i];
 
     if (`${vendor}TransitionProperty` in style) {
-      prefix = `-${vendor.toLowerCase()}`;
-      transitionEnd = vendorMap[vendor]('TransitionEnd');
-      animationEnd = vendorMap[vendor]('AnimationEnd');
+      tempPrefix = `-${vendor.toLowerCase()}`;
+      tempTransitionEnd = vendorMap[vendor]('TransitionEnd');
       break;
     }
   }
 
-  if (!transitionEnd && 'transitionProperty' in style) {
-    transitionEnd = 'transitionend';
+  if (!tempTransitionEnd && 'transitionProperty' in style) {
+    tempTransitionEnd = 'transitionend';
   }
-
-
-  if (!animationEnd && 'animationName' in style) {
-    animationEnd = 'animationend';
-  }
-
 
   style = null;
 
   return {
-    animationEnd,
-    transitionEnd,
-    prefix
+    transitionEnd: tempTransitionEnd,
+    prefix: tempPrefix
   };
 }
 
+const { prefix, transitionEnd } = getTransitionProperties();
+const addPrefix = (name: string) => `${prefix}-${name}`;
+
 export default {
-  backfaceVisibility,
-  transform,
   end: transitionEnd,
-  property: transitionProperty,
-  timing: transitionTiming,
-  delay: transitionDelay,
-  duration: transitionDuration
+  backfaceVisibility: addPrefix('backface-visibility'),
+  transform: addPrefix('transform'),
+  property: addPrefix('transition-property'),
+  timing: addPrefix('transition-timing-function'),
+  delay: addPrefix('transition-delay'),
+  duration: addPrefix('transition-duration')
 };

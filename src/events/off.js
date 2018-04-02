@@ -1,6 +1,4 @@
-const bind = window.addEventListener ? 'addEventListener' : 'attachEvent';
-const unbind = window.removeEventListener ? 'removeEventListener' : 'detachEvent';
-const eventPrefix = bind !== 'addEventListener' ? 'on' : '';
+// @flow
 
 /**
  * Unbind `target` event `eventName`'s callback `listener`.
@@ -12,6 +10,11 @@ const eventPrefix = bind !== 'addEventListener' ? 'on' : '';
  * @api public
  */
 
-export default (target, eventName, listener, capture = false) => {
-  target[unbind](eventPrefix + eventName, listener, capture);
+export default (
+  target: HTMLElement,
+  eventName: string,
+  listener: Function,
+  capture?: boolean = false
+): void => {
+  target.removeEventListener(eventName, listener, capture);
 };

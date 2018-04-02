@@ -1,15 +1,18 @@
-var UserAgent = require('./utils/UserAgent_DEPRECATED');
-var isEventSupported = require('./utils/isEventSupported');
+// @flow
+
+import UserAgent from './utils/UserAgent_DEPRECATED';
+import isEventSupported from './utils/isEventSupported';
 
 // Reasonable defaults
-var PIXEL_STEP = 10;
-var LINE_HEIGHT = 40;
-var PAGE_HEIGHT = 800;
+const PIXEL_STEP = 10;
+const LINE_HEIGHT = 40;
+const PAGE_HEIGHT = 800;
 
-
-function normalizeWheel(event) {
-  var sX = 0, sY = 0,       // spinX, spinY
-    pX = 0, pY = 0;       // pixelX, pixelY
+function normalizeWheel(event: Object) {
+  var sX = 0,
+    sY = 0, // spinX, spinY
+    pX = 0,
+    pY = 0; // pixelX, pixelY
 
   // Legacy
   if ('detail' in event) {
@@ -42,10 +45,12 @@ function normalizeWheel(event) {
   }
 
   if ((pX || pY) && event.deltaMode) {
-    if (event.deltaMode === 1) {          // delta in LINE units
+    if (event.deltaMode === 1) {
+      // delta in LINE units
       pX *= LINE_HEIGHT;
       pY *= LINE_HEIGHT;
-    } else {                             // delta in PAGE units
+    } else {
+      // delta in PAGE units
       pX *= PAGE_HEIGHT;
       pY *= PAGE_HEIGHT;
     }
@@ -53,10 +58,10 @@ function normalizeWheel(event) {
 
   // Fall-back if spin cannot be determined
   if (pX && !sX) {
-    sX = (pX < 1) ? -1 : 1;
+    sX = pX < 1 ? -1 : 1;
   }
   if (pY && !sY) {
-    sY = (pY < 1) ? -1 : 1;
+    sY = pY < 1 ? -1 : 1;
   }
 
   return {
@@ -67,18 +72,17 @@ function normalizeWheel(event) {
   };
 }
 
-
 /**
  * The best combination if you prefer spinX + spinY normalization.  It favors
  * the older DOMMouseScroll for Firefox, as FF does not include wheelDelta with
  * 'wheel' event, making spin speed determination impossible.
  */
-normalizeWheel.getEventType = function () /*string*/ {
-  return (UserAgent.firefox())
-    ? 'DOMMouseScroll'
-    : (isEventSupported('wheel'))
-      ? 'wheel'
-      : 'mousewheel';
+normalizeWheel.getEventType = () => {
+  if (UserAgent.firefox()) {
+    return 'DOMMouseScroll';
+  }
+
+  return isEventSupported('wheel') ? 'wheel' : 'mousewheel';
 };
 
 export default normalizeWheel;

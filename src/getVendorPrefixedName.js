@@ -1,13 +1,15 @@
-import { canUseDOM } from './query';
+// @flow
+
+import canUseDOM from './query/canUseDOM';
 import { camelize } from './utils/stringFormatter';
 
 let memoized = {};
 let prefixes = ['Webkit', 'ms', 'Moz', 'O'];
-let prefixRegex = new RegExp('^(' + prefixes.join('|') + ')');
+let prefixRegex = new RegExp(`^(${prefixes.join('|')})`);
 let testStyle = canUseDOM ? document.createElement('div').style : {};
 
 function getWithPrefix(name) {
-  for (let i = 0; i < prefixes.length; i++) {
+  for (let i = 0; i < prefixes.length; i += 1) {
     let prefixedName = prefixes[i] + name;
     if (prefixedName in testStyle) {
       return prefixedName;
@@ -21,17 +23,17 @@ function getWithPrefix(name) {
  * @return {?string} property name supported in the browser, or null if not
  * supported.
  */
-function getVendorPrefixedName(property) {
+function getVendorPrefixedName(property: string) {
   let name = camelize(property);
   if (memoized[name] === undefined) {
     let capitalizedName = name.charAt(0).toUpperCase() + name.slice(1);
     if (prefixRegex.test(capitalizedName)) {
       throw new Error(
-        'getVendorPrefixedName must only be called with unprefixed' +
-        'CSS property names. It was called with %s', property
+        `getVendorPrefixedName must only be called with unprefixed
+          CSS property names. It was called with ${property}`
       );
     }
-    memoized[name] = (name in testStyle) ? name : getWithPrefix(capitalizedName);
+    memoized[name] = name in testStyle ? name : getWithPrefix(capitalizedName);
   }
   return memoized[name];
 }

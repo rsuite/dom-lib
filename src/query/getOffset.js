@@ -1,11 +1,21 @@
+// @flow
+
 import ownerDocument from './ownerDocument';
 import getWindow from './getWindow';
 import contains from './contains';
 
-export default (node) => {
-  let doc = ownerDocument(node);
-  let win = getWindow(doc);
-  let docElem = doc && doc.documentElement;
+type Offset = {
+  top: number,
+  left: number,
+  height: number,
+  width: number
+};
+
+export default (node: HTMLElement): Offset | DOMRect | null => {
+  const doc = ownerDocument(node);
+  const win = getWindow(doc);
+  const docElem = doc && doc.documentElement;
+
   let box = {
     top: 0,
     left: 0,
@@ -14,7 +24,7 @@ export default (node) => {
   };
 
   if (!doc) {
-    return;
+    return null;
   }
 
   // Make sure it's not a disconnected DOM node
@@ -26,8 +36,7 @@ export default (node) => {
     box = node.getBoundingClientRect();
   }
 
-  if (box.width || box.height) {
-
+  if ((box.width || box.height) && docElem && win) {
     box = {
       top: box.top + (win.pageYOffset || docElem.scrollTop) - (docElem.clientTop || 0),
       left: box.left + (win.pageXOffset || docElem.scrollLeft) - (docElem.clientLeft || 0),

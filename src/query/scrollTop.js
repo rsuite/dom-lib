@@ -1,12 +1,24 @@
+// @flow
+
 import getWindow from './getWindow';
 
-export default (node, val) => {
-  let win = getWindow(node);
-  let top = win ? (('pageYOffset' in win) ? win.pageYOffset : win.document.documentElement.scrollTop) : node.scrollTop;
-  let left = win ? (('pageXOffset' in win) ? win.pageXOffset : win.document.documentElement.scrollLeft) : 0;
+export default (node: HTMLElement, val?: number): number => {
+  const win = getWindow(node);
+  let top = node.scrollTop;
+  let left = 0;
 
-  if (val === undefined) {
-    return top;
+  if (win) {
+    top = 'pageYOffset' in win ? win.pageYOffset : win.document.documentElement.scrollTop;
+    left = 'pageXOffset' in win ? win.pageXOffset : win.document.documentElement.scrollLeft;
   }
-  win ? win.scrollTo(left, val) : node.scrollTop = val;
+
+  if (val !== undefined) {
+    if (win) {
+      win.scrollTo(left, val);
+    } else {
+      node.scrollTop = val;
+    }
+  }
+
+  return top;
 };

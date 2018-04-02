@@ -1,4 +1,6 @@
-export default (target, className) => {
+// @flow
+
+export default (target: HTMLElement, className: string): boolean => {
   if (target.classList) {
     return !!className && target.classList.contains(className);
   }

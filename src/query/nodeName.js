@@ -1,3 +1,1 @@
-export default (node) => {
-  return node.nodeName && node.nodeName.toLowerCase();
-};
+export default (node: HTMLElement): string => node.nodeName && node.nodeName.toLowerCase();

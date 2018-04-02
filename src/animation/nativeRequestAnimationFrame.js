@@ -1,3 +1,5 @@
+// @flow
+
 export default global.requestAnimationFrame ||
   global.webkitRequestAnimationFrame ||
   global.mozRequestAnimationFrame ||

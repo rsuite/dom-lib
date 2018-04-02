@@ -1,27 +1,30 @@
+// @flow
+
+/* eslint-disable */
+
 import canUseDOM from './canUseDOM';
 
-export default (function () {
-  const root = canUseDOM && document.documentElement;
-
-  if (root && root.contains) {
-    return (context, node) => {
-      return context.contains(node);
-    };
-  } else if (root && root.compareDocumentPosition) {
-    return (context, node) => {
-      return context === node || !!(context.compareDocumentPosition(node) & 16);
-    };
-  } else {
-    return (context, node) => {
-      if (node) {
-        do {
-          if (node === context) {
-            return true;
-          }
-        } while ((node = node.parentNode));
+const fallback = (context: any, node: any) => {
+  if (node) {
+    do {
+      if (node === context) {
+        return true;
       }
-      return false;
-    };
+    } while ((node = node.parentNode));
+  }
+  return false;
+};
+
+// HTML DOM and SVG DOM may have different support levels,
+// so we need to check on context instead of a document root element.
+const contains = (context: any, node: any) => {
+  if (context.contains) {
+    return context.contains(node);
+  } else if (context.compareDocumentPosition) {
+    return context === node || !!(context.compareDocumentPosition(node) & 16);
   }
 
-})();
+  return fallback(context, node);
+};
+
+export default (() => (canUseDOM ? contains : fallback))();

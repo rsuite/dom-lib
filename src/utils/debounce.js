@@ -7,6 +7,7 @@
  * @param immediate
  * @returns {*}
  */
+/* eslint-disable */
 export default function debounce(func, wait, immediate) {
 
   var timeout, args, context, timestamp, result;

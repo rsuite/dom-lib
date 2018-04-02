@@ -1,24 +1,28 @@
+// @flow
+
 import hyphenateStyleName from './hyphenateStyleName';
 import removeStyle from './removeStyle';
 
-export default (node, property, value) => {
+export default (node: HTMLElement, property: string | Object, value?: string | number): void => {
   let css = '';
   let props = property;
 
   if (typeof property === 'string') {
     if (value === undefined) {
-      new Error('value is undefined');
+      throw new Error('value is undefined');
     }
     (props = {})[property] = value;
   }
 
-  for (var key in props) {
-    if (Object.prototype.hasOwnProperty.call(props, key)) {
-      !props[key] && props[key] !== 0 ?
-        removeStyle(node, hyphenateStyleName(key))
-        : (css += hyphenateStyleName(key) + ':' + props[key] + ';');
+  if (typeof props === 'object') {
+    for (let key in props) {
+      if (Object.prototype.hasOwnProperty.call(props, key)) {
+        !props[key] && props[key] !== 0
+          ? removeStyle(node, hyphenateStyleName(key))
+          : (css += `${hyphenateStyleName(key)}:${props[key]};`);
+      }
     }
   }
 
-  node.style.cssText += ';' + css;
+  node.style.cssText += `;${css}`;
 };

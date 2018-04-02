@@ -1,11 +1,22 @@
+// @flow
+
 import camelizeStyleName from './camelizeStyleName';
 import getComputedStyle from './getComputedStyle';
 import hyphenateStyleName from './hyphenateStyleName';
 
-export default (node, property) => {
-
+export default (node: HTMLElement, property?: string) => {
   if (property) {
-    return node.style[camelizeStyleName(property)] || getComputedStyle(node).getPropertyValue(hyphenateStyleName(property));
+    const value = node.style[camelizeStyleName(property)];
+
+    if (value) {
+      return value;
+    }
+
+    const styles = getComputedStyle(node);
+
+    if (styles) {
+      return styles.getPropertyValue(hyphenateStyleName(property));
+    }
   }
 
   return node.style || getComputedStyle(node);

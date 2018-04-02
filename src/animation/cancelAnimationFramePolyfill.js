@@ -1,3 +1,5 @@
+// @flow
+
 export default global.cancelAnimationFrame ||
   global.webkitCancelAnimationFrame ||
   global.mozCancelAnimationFrame ||

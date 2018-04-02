@@ -11,16 +11,15 @@ if (canUseDOM) {
 }
 
 function isEventSupported(eventNameSuffix, capture) {
-  if (!canUseDOM ||
-    capture && !('addEventListener' in document)) {
+  if (!canUseDOM || (capture && !('addEventListener' in document))) {
     return false;
   }
 
-  var eventName = 'on' + eventNameSuffix;
-  var isSupported = eventName in document;
+  let eventName = `on${eventNameSuffix}`;
+  let isSupported = eventName in document;
 
   if (!isSupported) {
-    var element = document.createElement('div');
+    let element = document.createElement('div');
     element.setAttribute(eventName, 'return;');
     isSupported = typeof element[eventName] === 'function';
   }
