@@ -6,7 +6,6 @@ module.exports = api => {
     presets: ['@babel/preset-env', '@babel/preset-react', '@babel/preset-flow'],
     plugins: [
       '@babel/plugin-transform-proto-to-assign',
-      '@babel/plugin-transform-runtime',
       '@babel/plugin-syntax-dynamic-import',
       '@babel/plugin-syntax-import-meta',
       '@babel/plugin-proposal-class-properties',
