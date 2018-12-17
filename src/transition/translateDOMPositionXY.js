@@ -2,13 +2,15 @@
 
 import BrowserSupportCore from '../BrowserSupportCore';
 import getVendorPrefixedName from '../getVendorPrefixedName';
+import getGlobal from '../getGlobal';
 
+const g = getGlobal();
 const TRANSFORM = getVendorPrefixedName('transform');
 const BACKFACE_VISIBILITY = getVendorPrefixedName('backfaceVisibility');
 
 const translateDOMPositionXY = (() => {
   if (BrowserSupportCore.hasCSSTransforms()) {
-    let ua = global.window ? global.window.navigator.userAgent : 'UNKNOWN';
+    let ua = g.window ? g.window.navigator.userAgent : 'UNKNOWN';
     let isSafari = /Safari\//.test(ua) && !/Chrome\//.test(ua);
 
     // It appears that Safari messes up the composition order

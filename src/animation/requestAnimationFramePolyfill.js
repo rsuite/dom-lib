@@ -2,23 +2,26 @@
 
 import nativeRequestAnimationFrame from './nativeRequestAnimationFrame';
 import emptyFunction from '../utils/emptyFunction';
+import getGlobal from '../getGlobal';
 
+const g = getGlobal();
 let lastTime = 0;
+
+function _setTimeout(callback: Function) {
+  var currTime = Date.now();
+  var timeDelay = Math.max(0, 16 - (currTime - lastTime));
+  lastTime = currTime + timeDelay;
+  return g.setTimeout(() => {
+    callback(Date.now());
+  }, timeDelay);
+}
 
 /**
  * Here is the native and polyfill version of requestAnimationFrame.
  * Please don't use it directly and use requestAnimationFrame module instead.
  */
 const requestAnimationFrame =
-  (nativeRequestAnimationFrame && nativeRequestAnimationFrame.bind(global)) ||
-  (callback => {
-    var currTime = Date.now();
-    var timeDelay = Math.max(0, 16 - (currTime - lastTime));
-    lastTime = currTime + timeDelay;
-    return global.setTimeout(() => {
-      callback(Date.now());
-    }, timeDelay);
-  });
+  (nativeRequestAnimationFrame && nativeRequestAnimationFrame.bind(g)) || _setTimeout;
 
 // Works around a rare bug in Safari 6 where the first request is never invoked.
 requestAnimationFrame(emptyFunction);

@@ -2,7 +2,7 @@ import { canUseDOM } from '../query';
 
 function getTransitionProperties() {
   if (!canUseDOM) {
-    return null;
+    return {};
   }
 
   const vendorMap = {
