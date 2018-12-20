@@ -1,7 +1,11 @@
 // @flow
 
-export default global.requestAnimationFrame ||
-  global.webkitRequestAnimationFrame ||
-  global.mozRequestAnimationFrame ||
-  global.oRequestAnimationFrame ||
-  global.msRequestAnimationFrame;
+import getGlobal from '../getGlobal';
+
+const g = getGlobal();
+
+export default g.requestAnimationFrame ||
+  g.webkitRequestAnimationFrame ||
+  g.mozRequestAnimationFrame ||
+  g.oRequestAnimationFrame ||
+  g.msRequestAnimationFrame;

@@ -17,9 +17,11 @@ export default (node: HTMLElement, property: string | Object, value?: string | n
   if (typeof props === 'object') {
     for (let key in props) {
       if (Object.prototype.hasOwnProperty.call(props, key)) {
-        !props[key] && props[key] !== 0
-          ? removeStyle(node, hyphenateStyleName(key))
-          : (css += `${hyphenateStyleName(key)}:${props[key]};`);
+        if (!props[key] && props[key] !== 0) {
+          removeStyle(node, hyphenateStyleName(key));
+        } else {
+          css += `${hyphenateStyleName(key)}:${props[key]};`;
+        }
       }
     }
   }

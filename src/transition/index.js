@@ -2,7 +2,7 @@ import { canUseDOM } from '../query';
 
 function getTransitionProperties() {
   if (!canUseDOM) {
-    return null;
+    return {};
   }
 
   const vendorMap = {
@@ -41,15 +41,17 @@ function getTransitionProperties() {
   };
 }
 
-const { prefix, transitionEnd } = getTransitionProperties();
-const addPrefix = (name: string) => `${prefix}-${name}`;
+export default () => {
+  const { prefix, transitionEnd } = getTransitionProperties();
+  const addPrefix = (name: string) => `${prefix}-${name}`;
 
-export default {
-  end: transitionEnd,
-  backfaceVisibility: addPrefix('backface-visibility'),
-  transform: addPrefix('transform'),
-  property: addPrefix('transition-property'),
-  timing: addPrefix('transition-timing-function'),
-  delay: addPrefix('transition-delay'),
-  duration: addPrefix('transition-duration')
+  return {
+    end: transitionEnd,
+    backfaceVisibility: addPrefix('backface-visibility'),
+    transform: addPrefix('transform'),
+    property: addPrefix('transition-property'),
+    timing: addPrefix('transition-timing-function'),
+    delay: addPrefix('transition-delay'),
+    duration: addPrefix('transition-duration')
+  };
 };

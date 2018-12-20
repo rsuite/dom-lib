@@ -1,8 +1,12 @@
 // @flow
 
-export default global.cancelAnimationFrame ||
-  global.webkitCancelAnimationFrame ||
-  global.mozCancelAnimationFrame ||
-  global.oCancelAnimationFrame ||
-  global.msCancelAnimationFrame ||
-  global.clearTimeout;
+import getGlobal from '../getGlobal';
+
+const g = getGlobal();
+
+export default g.cancelAnimationFrame ||
+  g.webkitCancelAnimationFrame ||
+  g.mozCancelAnimationFrame ||
+  g.oCancelAnimationFrame ||
+  g.msCancelAnimationFrame ||
+  g.clearTimeout;
