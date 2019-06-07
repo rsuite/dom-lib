@@ -10,7 +10,8 @@
     "build": "rm -rf lib && npx babel src --out-dir lib",
     "tdd": "karma start",
     "lint": "eslint src  *.js",
-    "test": "npm run lint &&  karma start --single-run"
+    "test": "npm run lint &&  karma start --single-run",
+    "prepublish": "npm run test && npm run build"
   },
   "author": "Simon Guo <simonguo.2009@gmail.com>",
   "license": "MIT",
