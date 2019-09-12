@@ -3,15 +3,17 @@
   "version": "1.1.0",
   "description": "DOM helper library",
   "main": "lib/index.js",
+  "module": "es/index.js",
   "directories": {
     "lib": "lib/"
   },
   "scripts": {
     "build": "rm -rf lib && npx babel src --out-dir lib",
+    "build-es": "rm -rf es && NODE_ENV=esm npx babel src --out-dir es",
     "tdd": "karma start",
     "lint": "eslint src  *.js",
     "test": "npm run lint &&  karma start --single-run",
-    "prepublish": "npm run test && npm run build"
+    "prepublish": "npm run test && npm run build && npm run build-es"
   },
   "author": "Simon Guo <simonguo.2009@gmail.com>",
   "license": "MIT",
@@ -21,8 +23,8 @@
   },
   "files": [
     "CHANGELOG.md",
-    "src",
-    "lib"
+    "lib",
+    "es"
   ],
   "devDependencies": {
     "@babel/cli": "^7.2.0",

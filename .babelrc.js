@@ -1,9 +1,17 @@
 module.exports = api => {
+  const { NODE_ENV } = process.env;
+  const modules = NODE_ENV === 'esm' ? false : 'commonjs';
+
   if (api) {
-    api.cache(() => process.env.NODE_ENV);
+    api.cache(() => NODE_ENV);
   }
+
   return {
-    presets: ['@babel/preset-env', '@babel/preset-react', '@babel/preset-flow'],
+    presets: [
+      ['@babel/preset-env', { modules, loose: true }],
+      '@babel/preset-react',
+      '@babel/preset-flow'
+    ],
     plugins: [
       '@babel/plugin-transform-proto-to-assign',
       '@babel/plugin-syntax-dynamic-import',
