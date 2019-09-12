@@ -1,3 +1,7 @@
+# 1.2.0
+
+- Added support for ESM
+
 # 1.1.0
 
 - Support Server-side Rendering
