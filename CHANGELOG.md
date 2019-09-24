@@ -1,3 +1,7 @@
+# 1.2.1
+
+-  Add parameter enable3DTransform for translateDOMPositionXY
+
 # 1.2.0
 
 - Added support for ESM
