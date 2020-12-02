@@ -5,10 +5,10 @@ export nativeRequestAnimationFrame from './nativeRequestAnimationFrame';
 export requestAnimationFramePolyfill from './requestAnimationFramePolyfill';
 
 const vendorMap = {
-  'animation': 'animationend',
-  'OAnimation': 'oAnimationEnd',
-  'MozAnimation': 'animationend',
-  'WebkitAnimation': 'webkitAnimationEnd'
+  animation: 'animationend',
+  OAnimation: 'oAnimationEnd',
+  MozAnimation: 'animationend',
+  WebkitAnimation: 'webkitAnimationEnd',
 };
 
 function getAnimationEvent() {
@@ -25,8 +25,8 @@ function getAnimationEvent() {
   }
 }
 
-export const events = ()=>{
+export const events = () => {
   return {
-   end : getAnimationEvent()
-  }
+    end: getAnimationEvent(),
+  };
 };

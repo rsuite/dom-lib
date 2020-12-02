@@ -1,6 +1,10 @@
+# 1.3.0
+
+- Add animation events helper
+
 # 1.2.1
 
--  Add parameter enable3DTransform for translateDOMPositionXY
+- Add parameter enable3DTransform for translateDOMPositionXY
 
 # 1.2.0
 
