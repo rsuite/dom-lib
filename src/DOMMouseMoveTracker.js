@@ -115,11 +115,11 @@ class DOMMouseMoveTracker {
   /**
    * Calls onMoveEnd passed into constructor and updates internal state.
    */
-  onMouseUp = () => {
+  onMouseUp = (event: Object) => {
     if (this.animationFrameID) {
       this.didMouseMove();
     }
-    this.onMoveEnd && this.onMoveEnd();
+    this.onMoveEnd && this.onMoveEnd(event);
   };
 }
 
