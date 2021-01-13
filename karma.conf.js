@@ -8,12 +8,15 @@ const webpackConfig = {
     pathinfo: true
   },
   mode: 'development',
+  resolve: {
+    extensions: ['.ts', '.tsx', '.js']
+  },
   devtool: 'inline-source-map',
   entry: __dirname + '/test/index.js',
   module: {
     rules: [
       {
-        test: /\.jsx?$/,
+        test: /\.tsx?$/,
         use: ['babel-loader?babelrc'],
         exclude: /node_modules/
       }
