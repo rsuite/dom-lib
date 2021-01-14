@@ -1,4 +1,4 @@
-# dom-lib [![Travis][build-badge]][build] [![npm][npm-badge]][npm]
+# dom-lib [![npm][npm-badge]][npm]
 
 DOM helper library
 
@@ -73,7 +73,5 @@ scrollLeft: (node: HTMLElement, val: number) => void;
 scrollTop: (node: HTMLElement, val: number) => void;
 ```
 
-[build-badge]: https://travis-ci.org/rsuite/dom-lib.svg?branch=master
-[build]: https://travis-ci.org/rsuite/dom-lib
 [npm-badge]: https://badge.fury.io/js/dom-lib.svg
 [npm]: http://badge.fury.io/js/dom-lib

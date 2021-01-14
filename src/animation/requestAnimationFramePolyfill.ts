@@ -1,5 +1,3 @@
-// @flow
-
 import nativeRequestAnimationFrame from './nativeRequestAnimationFrame';
 import emptyFunction from '../utils/emptyFunction';
 import getGlobal from '../getGlobal';

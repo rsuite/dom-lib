@@ -1,5 +1,3 @@
-// @flow
-
 import ownerDocument from './ownerDocument';
 import nodeName from './nodeName';
 import { getStyle } from '../style';

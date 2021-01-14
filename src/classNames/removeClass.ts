@@ -1,5 +1,3 @@
-// @flow
-
 export default (target: HTMLElement, className: string): HTMLElement => {
   if (className) {
     if (target.classList) {
