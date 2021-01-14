@@ -1,5 +1,3 @@
-// @flow
-
 import getGlobal from '../getGlobal';
 
 const g = getGlobal();

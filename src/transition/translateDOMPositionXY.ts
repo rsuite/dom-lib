@@ -1,5 +1,3 @@
-// @flow
-
 /**
  * Source code reference from:
  * https://github.com/facebook/fbjs/blob/d308fa83c9/packages/fbjs/src/dom/translateDOMPositionXY.js
