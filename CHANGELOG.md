@@ -1,3 +1,7 @@
+# 2.0.0
+
+- refactor: Migrate from flow to typescript
+
 # 1.3.0
 
 - Add animation events helper
