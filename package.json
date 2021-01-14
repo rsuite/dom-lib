@@ -14,7 +14,7 @@
     "tdd": "karma start",
     "lint": "eslint src/**/*.ts",
     "test": "npm run lint &&  karma start --single-run",
-    "prepublishOnly": "npm run test && npm run buld"
+    "prepublishOnly": "npm run build"
   },
   "author": "Simon Guo <simonguo.2009@gmail.com>",
   "license": "MIT",
