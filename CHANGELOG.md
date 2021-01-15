@@ -1,3 +1,7 @@
+# 2.0.1
+
+fix: Update type definition
+
 # 2.0.0
 
 - refactor: Migrate from flow to typescript
