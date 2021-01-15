@@ -1,4 +1,4 @@
-export default (node: HTMLElement): CSSStyleDeclaration | null => {
+export default (node: Element): CSSStyleDeclaration | null => {
   if (!node) {
     throw new TypeError('No Element passed to `getComputedStyle()`');
   }

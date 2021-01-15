@@ -5,13 +5,7 @@ interface CSSProperty {
   [key: string]: string | number;
 }
 
-CSSStyleDeclaration;
-
-export default (
-  node: HTMLElement,
-  property: string | CSSProperty,
-  value?: string | number
-): void => {
+export default (node: Element, property: string | CSSProperty, value?: string | number): void => {
   let css = '';
   let props = property;
 
@@ -34,5 +28,5 @@ export default (
     }
   }
 
-  node.style.cssText += `;${css}`;
+  (node as HTMLElement).style.cssText += `;${css}`;
 };

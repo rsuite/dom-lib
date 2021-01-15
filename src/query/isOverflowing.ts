@@ -13,7 +13,7 @@ function bodyIsOverflowing(node) {
   return false;
 }
 
-export default (container: HTMLElement) => {
+export default (container: Element) => {
   const win = getWindow(container);
   const isBody = container && container.tagName.toLowerCase() === 'body';
 

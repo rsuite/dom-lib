@@ -3,7 +3,7 @@
  */
 
 export default function on<K extends keyof DocumentEventMap>(
-  target: HTMLElement,
+  target: Element | Window,
   eventName: K,
   listener: EventListenerOrEventListenerObject,
   options: boolean | AddEventListenerOptions = false

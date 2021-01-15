@@ -1,6 +1,6 @@
 import ownerDocument from './ownerDocument';
 
-export default (componentOrElement: HTMLElement): Window => {
+export default (componentOrElement: Element): Window => {
   const doc = ownerDocument(componentOrElement);
   return doc.defaultView;
 };

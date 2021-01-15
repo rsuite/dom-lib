@@ -1,4 +1,4 @@
-export default (target: HTMLElement, className: string): boolean => {
+export default (target: Element, className: string): boolean => {
   if (target.classList) {
     return !!className && target.classList.contains(className);
   }

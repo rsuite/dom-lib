@@ -1,6 +1,6 @@
 import canUseDOM from './canUseDOM';
 
-const fallback = (context: HTMLElement, node: Node & ParentNode) => {
+const fallback = (context: Element, node: Node & ParentNode) => {
   if (node) {
     do {
       if (node === context) {
@@ -13,7 +13,7 @@ const fallback = (context: HTMLElement, node: Node & ParentNode) => {
 
 // HTML DOM and SVG DOM may have different support levels,
 // so we need to check on context instead of a document root element.
-const contains = (context: HTMLElement, node: Node & ParentNode) => {
+const contains = (context: Element, node: Node & ParentNode) => {
   if (context.contains) {
     return context.contains(node);
   } else if (context.compareDocumentPosition) {

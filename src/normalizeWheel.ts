@@ -7,10 +7,10 @@ const LINE_HEIGHT = 40;
 const PAGE_HEIGHT = 800;
 
 function normalizeWheel(event: any) {
-  var sX = 0,
-    sY = 0, // spinX, spinY
-    pX = 0,
-    pY = 0; // pixelX, pixelY
+  let sX = 0;
+  let sY = 0; // spinX, spinY
+  let pX = 0;
+  let pY = 0; // pixelX, pixelY
 
   // Legacy
   if ('detail' in event) {

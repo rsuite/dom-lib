@@ -1,6 +1,6 @@
 import hasClass from './hasClass';
 
-export default (target: HTMLElement, className: string): HTMLElement => {
+export default (target: Element, className: string): Element => {
   if (className) {
     if (target.classList) {
       target.classList.add(className);

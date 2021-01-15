@@ -1,14 +1,14 @@
 import canUseDOM from './query/canUseDOM';
 import { camelize } from './utils/stringFormatter';
 
-let memoized = {};
-let prefixes = ['Webkit', 'ms', 'Moz', 'O'];
-let prefixRegex = new RegExp(`^(${prefixes.join('|')})`);
-let testStyle = canUseDOM ? document.createElement('div').style : {};
+const memoized = {};
+const prefixes = ['Webkit', 'ms', 'Moz', 'O'];
+const prefixRegex = new RegExp(`^(${prefixes.join('|')})`);
+const testStyle = canUseDOM ? document.createElement('div').style : {};
 
 function getWithPrefix(name) {
   for (let i = 0; i < prefixes.length; i += 1) {
-    let prefixedName = prefixes[i] + name;
+    const prefixedName = prefixes[i] + name;
     if (prefixedName in testStyle) {
       return prefixedName;
     }
@@ -22,9 +22,9 @@ function getWithPrefix(name) {
  * supported.
  */
 function getVendorPrefixedName(property: string) {
-  let name = camelize(property);
+  const name = camelize(property);
   if (memoized[name] === undefined) {
-    let capitalizedName = name.charAt(0).toUpperCase() + name.slice(1);
+    const capitalizedName = name.charAt(0).toUpperCase() + name.slice(1);
     if (prefixRegex.test(capitalizedName)) {
       throw new Error(
         `getVendorPrefixedName must only be called with unprefixed
