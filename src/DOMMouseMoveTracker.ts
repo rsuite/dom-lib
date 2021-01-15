@@ -5,7 +5,7 @@ import requestAnimationFramePolyfill from './animation/requestAnimationFramePoly
 class DOMMouseMoveTracker {
   isDraggingStatus = false;
   animationFrameID = null;
-  domNode: HTMLElement;
+  domNode: Element;
   onMove = null;
   onMoveEnd = null;
   eventMoveToken = null;
@@ -13,14 +13,18 @@ class DOMMouseMoveTracker {
   moveEvent = null;
   deltaX = 0;
   deltaY = 0;
-  x: number = 0;
-  y: number = 0;
+  x = 0;
+  y = 0;
 
   /**
    * onMove is the callback that will be called on every mouse move.
    * onMoveEnd is called on mouse up when movement has ended.
    */
-  constructor(onMove: Function, onMoveEnd: Function, domNode: HTMLElement) {
+  constructor(
+    onMove: (x: number, y: number, e: Event) => void,
+    onMoveEnd: (e: Event) => void,
+    domNode: Element
+  ) {
     this.domNode = domNode;
     this.onMove = onMove;
     this.onMoveEnd = onMoveEnd;
@@ -84,8 +88,8 @@ class DOMMouseMoveTracker {
    * Calls onMove passed into constructor and updates internal state.
    */
   onMouseMove = (event: Event) => {
-    let x: number = (event as MouseEvent).clientX;
-    let y = (event as MouseEvent).clientY;
+    const x = (event as MouseEvent).clientX;
+    const y = (event as MouseEvent).clientY;
 
     this.deltaX += x - this.x;
     this.deltaY += y - this.y;

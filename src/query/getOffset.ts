@@ -9,7 +9,7 @@ type Offset = {
   width: number;
 };
 
-export default (node: HTMLElement): Offset | DOMRect | null => {
+export default (node: Element): Offset | DOMRect | null => {
   const doc = ownerDocument(node);
   const win = getWindow(doc);
   const docElem = doc && doc.documentElement;
@@ -38,8 +38,8 @@ export default (node: HTMLElement): Offset | DOMRect | null => {
     box = {
       top: box.top + (win.pageYOffset || docElem.scrollTop) - (docElem.clientTop || 0),
       left: box.left + (win.pageXOffset || docElem.scrollLeft) - (docElem.clientLeft || 0),
-      width: (box.width === null ? node.offsetWidth : box.width) || 0,
-      height: (box.height === null ? node.offsetHeight : box.height) || 0
+      width: (box.width === null ? (node as HTMLElement).offsetWidth : box.width) || 0,
+      height: (box.height === null ? (node as HTMLElement).offsetHeight : box.height) || 0
     };
   }
 

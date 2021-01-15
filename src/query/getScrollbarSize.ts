@@ -2,7 +2,7 @@ import canUseDOM from './canUseDOM';
 
 let size;
 
-export default (recalc: boolean): number | void => {
+export default (recalc?: boolean): number | void => {
   if (size === undefined || recalc) {
     if (canUseDOM) {
       const scrollDiv = document.createElement('div');

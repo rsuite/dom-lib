@@ -2,16 +2,16 @@ import ownerDocument from './ownerDocument';
 import nodeName from './nodeName';
 import { getStyle } from '../style';
 
-export default (node: HTMLElement): HTMLElement => {
+export default (node: Element): Element => {
   const doc = ownerDocument(node);
-  let offsetParent: any = node && node.offsetParent;
+  let offsetParent: Element = (node as HTMLElement)?.offsetParent;
 
   while (
     offsetParent &&
     nodeName(node) !== 'html' &&
     getStyle(offsetParent, 'position') === 'static'
   ) {
-    offsetParent = offsetParent.offsetParent;
+    offsetParent = (offsetParent as HTMLElement).offsetParent;
   }
 
   return offsetParent || doc.documentElement;

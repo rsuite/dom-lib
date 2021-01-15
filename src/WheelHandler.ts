@@ -40,11 +40,11 @@ class WheelHandler {
   }
 
   onWheel(event) {
-    let normalizedEvent = normalizeWheel(event);
-    let deltaX = this.deltaX + normalizedEvent.pixelX;
-    let deltaY = this.deltaY + normalizedEvent.pixelY;
-    let handleScrollX = this.handleScrollX(deltaX, deltaY);
-    let handleScrollY = this.handleScrollY(deltaY, deltaX);
+    const normalizedEvent = normalizeWheel(event);
+    const deltaX = this.deltaX + normalizedEvent.pixelX;
+    const deltaY = this.deltaY + normalizedEvent.pixelY;
+    const handleScrollX = this.handleScrollX(deltaX, deltaY);
+    const handleScrollY = this.handleScrollY(deltaY, deltaX);
     if (!handleScrollX && !handleScrollY) {
       return;
     }

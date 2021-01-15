@@ -1,6 +1,6 @@
 import getWindow from './getWindow';
 
-export default (node: HTMLElement, val?: number): number => {
+export default (node: Element, val?: number): number => {
   const win = getWindow(node);
   let left = node.scrollLeft;
   let top = 0;

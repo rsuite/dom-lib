@@ -12,7 +12,7 @@ type Offset = {
   width: number;
 };
 
-export default (node: HTMLElement, offsetParent: HTMLElement): Offset | DOMRect | null => {
+export default (node: Element, offsetParent?: Element): Offset | DOMRect | null => {
   const parentOffset = {
     top: 0,
     left: 0

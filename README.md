@@ -19,58 +19,58 @@ import { addClass } from 'dom-lib';
 Class
 
 ```typescript
-hasClass: (node: HTMLElement, className: string) => boolean;
-addClass: (node: HTMLElement, className: string) => HTMLElement;
-removeClass: (node: HTMLElement, className: string) => HTMLElement;
-toggleClass: (node: HTMLElement, className: string) => HTMLElement;
+hasClass: (node: Element, className: string) => boolean;
+addClass: (node: Element, className: string) => Element;
+removeClass: (node: Element, className: string) => Element;
+toggleClass: (node: Element, className: string) => Element;
 ```
 
 Style
 
 ```typescript
-getStyle: (node: HTMLElement, property: string) => string;
-getStyle: (node: HTMLElement) => Object;
+getStyle: (node: Element, property: string) => string;
+getStyle: (node: Element) => Object;
 
-removeStyle: (node: HTMLElement, property: string) => void;
-removeStyle: (node: HTMLElement, propertys: Array<string>) => void;
+removeStyle: (node: Element, property: string) => void;
+removeStyle: (node: Element, propertys: Array<string>) => void;
 
-addStyle: (node: HTMLElement, property: string, value: string) => void;
-addStyle: (node: HTMLElement, style: Object) => void;
+addStyle: (node: Element, property: string, value: string) => void;
+addStyle: (node: Element, style: Object) => void;
 ```
 
 Events
 
 ```typescript
-on: (target: HTMLElement, eventName: string, listener: Function, capture: boolean = false) => {
+on: (target: Element, eventName: string, listener: Function, capture: boolean = false) => {
   off: Function;
 };
-off: (target: HTMLElement, eventName: string, listener: Function, capture: boolean = false) =>
+off: (target: Element, eventName: string, listener: Function, capture: boolean = false) =>
   void;
 ```
 
 Query
 
 ```typescript
-activeElement: () => HTMLElement;
-getHeight: (node: HTMLElement, client: HTMLElement) => number;
-getWidth: (node: HTMLElement, client: HTMLElement) => number;
-getOffset: (node: HTMLElement) => Object;
-getOffsetParent: (node: HTMLElement) => Object;
-getPosition: (node: HTMLElement, offsetParent) => Object;
-getWindow: (node: HTMLElement) => String;
-nodeName: (node: HTMLElement) => String;
-ownerDocument: (node: HTMLElement) => Object;
-ownerWindow: (node: HTMLElement) => Object;
-contains: (context: HTMLElement, node: HTMLElement) => boolean;
-scrollLeft: (node: HTMLElement) => number;
-scrollTop: (node: HTMLElement) => number;
+activeElement: () => Element;
+getHeight: (node: Element, client: Element) => number;
+getWidth: (node: Element, client: Element) => number;
+getOffset: (node: Element) => Object;
+getOffsetParent: (node: Element) => Object;
+getPosition: (node: Element, offsetParent) => Object;
+getWindow: (node: Element) => String;
+nodeName: (node: Element) => String;
+ownerDocument: (node: Element) => Object;
+ownerWindow: (node: Element) => Object;
+contains: (context: Element, node: Element) => boolean;
+scrollLeft: (node: Element) => number;
+scrollTop: (node: Element) => number;
 ```
 
 Utils
 
 ```typescript
-scrollLeft: (node: HTMLElement, val: number) => void;
-scrollTop: (node: HTMLElement, val: number) => void;
+scrollLeft: (node: Element, val: number) => void;
+scrollTop: (node: Element, val: number) => void;
 ```
 
 [npm-badge]: https://badge.fury.io/js/dom-lib.svg

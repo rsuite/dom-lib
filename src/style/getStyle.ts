@@ -2,9 +2,9 @@ import camelizeStyleName from './camelizeStyleName';
 import getComputedStyle from './getComputedStyle';
 import hyphenateStyleName from './hyphenateStyleName';
 
-export default (node: HTMLElement, property?: string) => {
+export default (node: Element, property?: string) => {
   if (property) {
-    const value = node.style[camelizeStyleName(property)];
+    const value = (node as HTMLElement).style[camelizeStyleName(property)];
 
     if (value) {
       return value;
@@ -17,5 +17,5 @@ export default (node: HTMLElement, property?: string) => {
     }
   }
 
-  return node.style || getComputedStyle(node);
+  return (node as HTMLElement).style || getComputedStyle(node);
 };
