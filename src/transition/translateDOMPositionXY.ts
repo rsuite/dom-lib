@@ -11,7 +11,7 @@ const g = getGlobal();
 const TRANSFORM = getVendorPrefixedName('transform');
 const BACKFACE_VISIBILITY = getVendorPrefixedName('backfaceVisibility');
 
-interface Options {
+export interface Options {
   enable3DTransform?: boolean;
 }
 
