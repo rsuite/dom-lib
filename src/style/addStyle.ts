@@ -1,7 +1,7 @@
 import hyphenateStyleName from './hyphenateStyleName';
 import removeStyle from './removeStyle';
 
-interface CSSProperty {
+export interface CSSProperty {
   [key: string]: string | number;
 }
 
