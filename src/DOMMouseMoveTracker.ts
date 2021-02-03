@@ -1,3 +1,8 @@
+/**
+ * Source code reference from:
+ * https://github.com/facebook/fbjs/blob/master/packages/fbjs/src/dom/DOMMouseMoveTracker.js
+ */
+
 import on from './events/on';
 import cancelAnimationFramePolyfill from './animation/cancelAnimationFramePolyfill';
 import requestAnimationFramePolyfill from './animation/requestAnimationFramePolyfill';
@@ -20,11 +25,7 @@ class DOMMouseMoveTracker {
    * onMove is the callback that will be called on every mouse move.
    * onMoveEnd is called on mouse up when movement has ended.
    */
-  constructor(
-    onMove: (x: number, y: number, e: Event) => void,
-    onMoveEnd: (e: Event) => void,
-    domNode: Element
-  ) {
+  constructor(onMove: (x: number, y: number, e) => void, onMoveEnd: (e) => void, domNode: Element) {
     this.domNode = domNode;
     this.onMove = onMove;
     this.onMoveEnd = onMoveEnd;
@@ -36,7 +37,7 @@ class DOMMouseMoveTracker {
    * listeners are added at the document.body level. It takes in an event
    * in order to grab inital state.
    */
-  captureMouseMoves(event: MouseEvent) {
+  captureMouseMoves(event) {
     if (!this.eventMoveToken && !this.eventUpToken) {
       this.eventMoveToken = on(this.domNode, 'mousemove', this.onMouseMove);
       this.eventUpToken = on(this.domNode, 'mouseup', this.onMouseUp);
@@ -87,7 +88,7 @@ class DOMMouseMoveTracker {
   /**
    * Calls onMove passed into constructor and updates internal state.
    */
-  onMouseMove = (event: Event) => {
+  onMouseMove = event => {
     const x = (event as MouseEvent).clientX;
     const y = (event as MouseEvent).clientY;
 
@@ -117,7 +118,7 @@ class DOMMouseMoveTracker {
   /**
    * Calls onMoveEnd passed into constructor and updates internal state.
    */
-  onMouseUp = (event: Event) => {
+  onMouseUp = event => {
     if (this.animationFrameID) {
       this.didMouseMove();
     }
