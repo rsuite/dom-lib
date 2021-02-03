@@ -1,7 +1,7 @@
 import getWindow from './getWindow';
 import getOffset from './getOffset';
 
-export default (node: Element, client?: Element): number => {
+export default (node: Element | Window, client?: Element): number => {
   const win = getWindow(node);
 
   if (win) {
@@ -9,10 +9,10 @@ export default (node: Element, client?: Element): number => {
   }
 
   if (client) {
-    return node.clientWidth;
+    return (node as Element).clientWidth;
   }
 
-  const offset = getOffset(node);
+  const offset = getOffset(node as Element);
 
   return offset ? offset.width : 0;
 };
