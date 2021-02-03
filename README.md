@@ -2,13 +2,13 @@
 
 DOM helper library
 
-## 安装
+## Install
 
 ```
 npm install dom-lib --save
 ```
 
-## 示例
+## Usage
 
 ```js
 import { addClass } from 'dom-lib';
