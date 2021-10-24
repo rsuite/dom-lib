@@ -55,4 +55,12 @@ describe('Query', () => {
     expect(lib.contains(el5, el6)).to.equal(true);
   });
 
+  it('should container with offset', () => {
+    let container = document.getElementById('case-7');
+    let node = document.getElementById('case-8');
+
+    const posi = lib.getPosition(node, container, false);
+    expect(posi.top).to.equal(20);
+    expect(posi.left).to.equal(10);
+  })
 });
