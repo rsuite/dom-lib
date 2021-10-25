@@ -1,10 +1,14 @@
+# 2.1.0
+
+- feat(getPosition): support keep margin (#20)
+
 # 2.0.2
 
-Fix typescript type definition
+- Fix typescript type definition
 
 # 2.0.1
 
-fix: Update type definition
+- fix: Update type definition
 
 # 2.0.0
 

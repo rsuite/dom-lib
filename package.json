@@ -1,6 +1,6 @@
 {
   "name": "dom-lib",
-  "version": "2.0.3",
+  "version": "2.1.0",
   "description": "DOM helper library",
   "main": "lib/index.js",
   "module": "es/index.js",
