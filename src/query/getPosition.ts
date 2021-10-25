@@ -12,7 +12,11 @@ type Offset = {
   width: number;
 };
 
-export default (node: Element, offsetParent?: Element): Offset | DOMRect | null => {
+export default (
+  node: Element,
+  offsetParent?: Element,
+  calcMargin = true
+): Offset | DOMRect | null => {
   const parentOffset = {
     top: 0,
     left: 0
@@ -47,14 +51,12 @@ export default (node: Element, offsetParent?: Element): Offset | DOMRect | null 
   // Subtract parent offsets and node margins
 
   if (offset) {
+    const marginTop = calcMargin ? parseInt(getStyle(node, 'marginTop') as string, 10) || 0 : 0;
+    const marginLeft = calcMargin ? parseInt(getStyle(node, 'marginLeft') as string, 10) || 0 : 0;
     return {
       ...offset,
-      top:
-        offset.top - parentOffset.top - (parseInt(getStyle(node, 'marginTop') as string, 10) || 0),
-      left:
-        offset.left -
-        parentOffset.left -
-        (parseInt(getStyle(node, 'marginLeft') as string, 10) || 0)
+      top: offset.top - parentOffset.top - marginTop,
+      left: offset.left - parentOffset.left - marginLeft
     };
   }
 
