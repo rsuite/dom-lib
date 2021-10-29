@@ -15,3 +15,4 @@ export { default as activeElement } from './activeElement';
 export { default as getScrollbarSize } from './getScrollbarSize';
 export { default as getHeight } from './getHeight';
 export { default as getWidth } from './getWidth';
+export { default as isFocusable } from './isFocusable';
