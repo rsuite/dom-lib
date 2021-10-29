@@ -1,4 +1,3 @@
-import nativeRequestAnimationFrame from './nativeRequestAnimationFrame';
 import emptyFunction from '../utils/emptyFunction';
 import getGlobal from '../getGlobal';
 
@@ -14,12 +13,7 @@ function _setTimeout(callback: (t: number) => void) {
   }, timeDelay);
 }
 
-/**
- * Here is the native and polyfill version of requestAnimationFrame.
- * Please don't use it directly and use requestAnimationFrame module instead.
- */
-const requestAnimationFrame =
-  (nativeRequestAnimationFrame && nativeRequestAnimationFrame.bind(g)) || _setTimeout;
+const requestAnimationFrame = g.requestAnimationFrame || _setTimeout;
 
 // Works around a rare bug in Safari 6 where the first request is never invoked.
 requestAnimationFrame(emptyFunction);

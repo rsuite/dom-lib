@@ -1,7 +1,6 @@
 import { canUseDOM } from '../query';
 
 export { default as cancelAnimationFramePolyfill } from './cancelAnimationFramePolyfill';
-export { default as nativeRequestAnimationFrame } from './nativeRequestAnimationFrame';
 export { default as requestAnimationFramePolyfill } from './requestAnimationFramePolyfill';
 
 const vendorMap = {
