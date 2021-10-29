@@ -2,42 +2,41 @@ import * as lib from '../src';
 import $ from 'jquery';
 
 describe('Query', () => {
-
   beforeEach(() => {
     document.body.innerHTML = window.__html__['test/html/query.html'];
   });
 
   it('should get 100 of height', () => {
-    let el = document.getElementById('case-1');
-    let height = lib.getHeight(el);
-    let k = expect(height).to.equal(100);
+    const el = document.getElementById('case-1');
+    const height = lib.getHeight(el);
+    expect(height).to.equal(100);
   });
 
   it('should get 200 of width', () => {
-    let el = document.getElementById('case-1');
-    let height = lib.getWidth(el);
+    const el = document.getElementById('case-1');
+    const height = lib.getWidth(el);
     expect(height).to.equal(200);
   });
 
   it('should handle fixed position', () => {
-    let el = document.getElementById('case-2');
-    let position = lib.getPosition(el);
-    let $position = $('#case-2').position();
+    const el = document.getElementById('case-2');
+    const position = lib.getPosition(el);
+    const $position = $('#case-2').position();
     expect(position.left).to.equal($position.left);
     expect(position.top).to.equal($position.top);
   });
 
   it('should handle absolute position', () => {
-    let el = document.getElementById('case-3');
-    let position = lib.getPosition(el);
-    let $position = $('#case-3').position();
+    const el = document.getElementById('case-3');
+    const position = lib.getPosition(el);
+    const $position = $('#case-3').position();
 
     expect(position.left).to.equal($position.left);
     expect(position.top).to.equal($position.top);
   });
 
   it('should handle scroll position', () => {
-    let el = document.getElementById('case-4');
+    const el = document.getElementById('case-4');
     lib.scrollTop(el, 100);
     lib.scrollLeft(el, 200);
 
@@ -45,22 +44,57 @@ describe('Query', () => {
     expect(200).to.equal($('#case-4').scrollLeft());
   });
 
-
   it('should check for contained element', () => {
-    let el4 = document.getElementById('case-4');
-    let el5 = document.getElementById('case-5');
-    let el6 = document.getElementById('case-6');
+    const el4 = document.getElementById('case-4');
+    const el5 = document.getElementById('case-5');
+    const el6 = document.getElementById('case-6');
 
     expect(lib.contains(el5, el4)).to.equal(false);
     expect(lib.contains(el5, el6)).to.equal(true);
   });
 
   it('should container with offset', () => {
-    let container = document.getElementById('case-7');
-    let node = document.getElementById('case-8');
+    const container = document.getElementById('case-7');
+    const node = document.getElementById('case-8');
 
     const posi = lib.getPosition(node, container, false);
     expect(posi.top).to.equal(20);
     expect(posi.left).to.equal(10);
-  })
+  });
+
+  describe('isFocusable', () => {
+    function createElement(type, props = {}) {
+      const element = document.createElement(type, props);
+      const keys = Object.keys(props);
+      for (const prop of keys) {
+        const value = props[prop];
+        element[prop] = value;
+        element.setAttribute(prop.toLowerCase(), `${value}`);
+      }
+
+      document.body.appendChild(element);
+
+      return element;
+    }
+
+    it('should return true for focusable element', () => {
+      expect(
+        lib.isFocusable(document.createElementNS('http://www.w3.org/2000/svg', 'svg'))
+      ).to.equal(false);
+      expect(lib.isFocusable(createElement('input'))).to.equal(true);
+      expect(lib.isFocusable(createElement('input', { tabIndex: -1 }))).to.equal(true);
+      expect(lib.isFocusable(createElement('input', { hidden: true }))).to.equal(false);
+      expect(lib.isFocusable(createElement('input', { disabled: true }))).to.equal(false);
+      expect(lib.isFocusable(createElement('a'))).to.equal(false);
+      expect(lib.isFocusable(createElement('a', { href: '' }))).to.equal(true);
+      expect(lib.isFocusable(createElement('audio'))).to.equal(false);
+      expect(lib.isFocusable(createElement('audio', { controls: true }))).to.equal(true);
+      expect(lib.isFocusable(createElement('video'))).to.equal(false);
+      expect(lib.isFocusable(createElement('video', { controls: true }))).to.equal(true);
+      expect(lib.isFocusable(createElement('div'))).to.equal(false);
+      expect(lib.isFocusable(createElement('div', { contentEditable: true }))).to.equal(true);
+      expect(lib.isFocusable(createElement('div', { tabIndex: 0 }))).to.equal(true);
+      expect(lib.isFocusable(createElement('div', { tabIndex: -1 }))).to.equal(true);
+    });
+  });
 });
