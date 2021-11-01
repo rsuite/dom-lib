@@ -3,9 +3,9 @@
  * https://github.com/facebook/fbjs/blob/master/packages/fbjs/src/dom/DOMMouseMoveTracker.js
  */
 
-import on from './events/on';
-import cancelAnimationFramePolyfill from './animation/cancelAnimationFramePolyfill';
-import requestAnimationFramePolyfill from './animation/requestAnimationFramePolyfill';
+import on from './on';
+import cancelAnimationFramePolyfill from './cancelAnimationFramePolyfill';
+import requestAnimationFramePolyfill from './requestAnimationFramePolyfill';
 
 class DOMMouseMoveTracker {
   isDraggingStatus = false;

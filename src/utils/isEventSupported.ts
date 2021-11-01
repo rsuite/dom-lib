@@ -1,4 +1,4 @@
-import canUseDOM from '../query/canUseDOM';
+import canUseDOM from '../canUseDOM';
 
 let useHasFeature;
 if (canUseDOM) {

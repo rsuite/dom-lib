@@ -1,6 +1,6 @@
-import camelizeStyleName from './camelizeStyleName';
-import getComputedStyle from './getComputedStyle';
-import hyphenateStyleName from './hyphenateStyleName';
+import camelizeStyleName from './utils/camelizeStyleName';
+import getComputedStyle from './utils/getComputedStyle';
+import hyphenateStyleName from './utils/hyphenateStyleName';
 
 export default (node: Element, property?: string) => {
   if (property) {

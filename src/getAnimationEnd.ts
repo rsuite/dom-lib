@@ -1,7 +1,4 @@
-import { canUseDOM } from '../query';
-
-export { default as cancelAnimationFramePolyfill } from './cancelAnimationFramePolyfill';
-export { default as requestAnimationFramePolyfill } from './requestAnimationFramePolyfill';
+import canUseDOM from './canUseDOM';
 
 const vendorMap = {
   animation: 'animationend',
@@ -10,7 +7,7 @@ const vendorMap = {
   WebkitAnimation: 'webkitAnimationEnd'
 };
 
-function getAnimationEvent() {
+function getAnimationEnd() {
   if (!canUseDOM) {
     return;
   }
@@ -24,8 +21,4 @@ function getAnimationEvent() {
   }
 }
 
-export const events = () => {
-  return {
-    end: getAnimationEvent()
-  };
-};
+export default getAnimationEnd;

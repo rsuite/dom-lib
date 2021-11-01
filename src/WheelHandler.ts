@@ -1,6 +1,6 @@
 import emptyFunction from './utils/emptyFunction';
-import normalizeWheel from './normalizeWheel';
-import requestAnimationFramePolyfill from './animation/requestAnimationFramePolyfill';
+import normalizeWheel from './utils/normalizeWheel';
+import requestAnimationFramePolyfill from './requestAnimationFramePolyfill';
 
 class WheelHandler {
   animationFrameID = null;

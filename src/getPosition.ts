@@ -1,6 +1,6 @@
 import getOffsetParent from './getOffsetParent';
 import getOffset from './getOffset';
-import { getStyle } from '../style';
+import getStyle from './getStyle';
 import scrollTop from './scrollTop';
 import scrollLeft from './scrollLeft';
 import nodeName from './nodeName';

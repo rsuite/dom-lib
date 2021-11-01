@@ -1,4 +1,4 @@
-import hyphenateStyleName from './hyphenateStyleName';
+import hyphenateStyleName from './utils/hyphenateStyleName';
 import removeStyle from './removeStyle';
 
 export interface CSSProperty {
