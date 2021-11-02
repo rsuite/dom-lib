@@ -1,6 +1,6 @@
 {
   "name": "dom-lib",
-  "version": "2.1.0",
+  "version": "3.0.0",
   "description": "DOM helper library",
   "main": "lib/cjs/index.js",
   "module": "lib/esm/index.js",
@@ -15,7 +15,8 @@
     "tdd": "karma start",
     "lint": "eslint src/**/*.ts",
     "test": "npm run lint &&  karma start --single-run",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "npm run build",
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s"
   },
   "author": "Simon Guo <simonguo.2009@gmail.com>",
   "license": "MIT",
@@ -48,6 +49,7 @@
     "babel-plugin-add-module-exports": "^1.0.4",
     "brfs": "^1.5.0",
     "chai": "^3.5.0",
+    "conventional-changelog-cli": "^2.1.1",
     "del": "^6.0.0",
     "es5-shim": "^4.1.14",
     "eslint": "^6.7.2",

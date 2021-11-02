@@ -1,3 +1,18 @@
+# [3.0.0](https://github.com/rsuite/dom-lib/compare/2.1.0...3.0.0) (2021-11-02)
+
+
+### Bug Fixes
+
+* **animation:** remove webkitRequestAnimationFrame ([#22](https://github.com/rsuite/dom-lib/issues/22)) ([69dbbb1](https://github.com/rsuite/dom-lib/commit/69dbbb17a54cf1dfb3a7dee65e6ce4069c578982))
+* **deps:** add @babel/runtime ([#25](https://github.com/rsuite/dom-lib/issues/25)) ([b40f9e5](https://github.com/rsuite/dom-lib/commit/b40f9e5e2d965115c1fa8f30e294cc4665e82826))
+
+
+### Features
+
+* **query:** add support for isFocusable ([#23](https://github.com/rsuite/dom-lib/issues/23)) ([eee920a](https://github.com/rsuite/dom-lib/commit/eee920ac0efe5670762734d16c14c2117c48f053))
+
+
+
 # 2.1.0
 
 - feat(getPosition): support keep margin (#20)
