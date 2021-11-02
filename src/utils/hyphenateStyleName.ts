@@ -1,4 +1,4 @@
-import { hyphenate } from '../utils/stringFormatter';
+import { hyphenate } from './stringFormatter';
 
 const msPattern = /^ms-/;
 

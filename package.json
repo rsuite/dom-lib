@@ -2,15 +2,16 @@
   "name": "dom-lib",
   "version": "2.1.0",
   "description": "DOM helper library",
-  "main": "lib/index.js",
-  "module": "es/index.js",
+  "main": "lib/cjs/index.js",
+  "module": "lib/esm/index.js",
+  "typings": "lib/esm/index.d.ts",
   "directories": {
-    "lib": "lib/"
+    "lib": "cjs/"
   },
   "scripts": {
     "build": "npm run build:gulp && npm run build:types",
-    "build:gulp": "gulp build",
-    "build:types": "npx tsc --emitDeclarationOnly --outDir lib && npx tsc --emitDeclarationOnly --outDir es",
+    "build:gulp": "gulp build --gulpfile scripts/gulpfile.js",
+    "build:types": "npx tsc --emitDeclarationOnly --outDir lib/cjs && npx tsc --emitDeclarationOnly --outDir lib/esm",
     "tdd": "karma start",
     "lint": "eslint src/**/*.ts",
     "test": "npm run lint &&  karma start --single-run",

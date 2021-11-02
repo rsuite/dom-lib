@@ -1,5 +1,5 @@
-import emptyFunction from '../utils/emptyFunction';
-import getGlobal from '../getGlobal';
+import emptyFunction from './utils/emptyFunction';
+import getGlobal from './utils/getGlobal';
 
 const g = getGlobal();
 let lastTime = 0;
@@ -13,9 +13,12 @@ function _setTimeout(callback: (t: number) => void) {
   }, timeDelay);
 }
 
-const requestAnimationFrame = g.requestAnimationFrame || _setTimeout;
+/**
+ * @deprecated Use `requestAnimationFrame` instead.
+ */
+const requestAnimationFramePolyfill = g.requestAnimationFrame || _setTimeout;
 
 // Works around a rare bug in Safari 6 where the first request is never invoked.
-requestAnimationFrame(emptyFunction);
+requestAnimationFramePolyfill(emptyFunction);
 
-export default requestAnimationFrame;
+export default requestAnimationFramePolyfill;

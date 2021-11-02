@@ -1,4 +1,4 @@
-import { canUseDOM } from '../query';
+import canUseDOM from './canUseDOM';
 
 function getTransitionProperties() {
   if (!canUseDOM) {
@@ -35,18 +35,10 @@ function getTransitionProperties() {
 
   style = null;
 
-  return {
-    transitionEnd: tempTransitionEnd,
-    prefix: tempPrefix
-  };
-}
-
-export default () => {
-  const { prefix, transitionEnd } = getTransitionProperties();
-  const addPrefix = (name: string) => `${prefix}-${name}`;
+  const addPrefix = (name: string) => `${tempPrefix}-${name}`;
 
   return {
-    end: transitionEnd,
+    end: tempTransitionEnd,
     backfaceVisibility: addPrefix('backface-visibility'),
     transform: addPrefix('transform'),
     property: addPrefix('transition-property'),
@@ -54,4 +46,6 @@ export default () => {
     delay: addPrefix('transition-delay'),
     duration: addPrefix('transition-duration')
   };
-};
+}
+
+export default getTransitionProperties;

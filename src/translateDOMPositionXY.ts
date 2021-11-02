@@ -3,9 +3,9 @@
  * https://github.com/facebook/fbjs/blob/d308fa83c9/packages/fbjs/src/dom/translateDOMPositionXY.js
  */
 
-import BrowserSupportCore from '../BrowserSupportCore';
-import getVendorPrefixedName from '../getVendorPrefixedName';
-import getGlobal from '../getGlobal';
+import BrowserSupportCore from './utils/BrowserSupportCore';
+import getVendorPrefixedName from './utils/getVendorPrefixedName';
+import getGlobal from './utils/getGlobal';
 
 const g = getGlobal();
 const TRANSFORM = getVendorPrefixedName('transform');

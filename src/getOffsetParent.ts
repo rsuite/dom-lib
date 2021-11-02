@@ -1,6 +1,6 @@
 import ownerDocument from './ownerDocument';
 import nodeName from './nodeName';
-import { getStyle } from '../style';
+import getStyle from './getStyle';
 
 export default (node: Element): Element => {
   const doc = ownerDocument(node);

@@ -11,7 +11,7 @@ npm install dom-lib --save
 ## Usage
 
 ```js
-import { addClass } from 'dom-lib';
+import addClass from 'dom-lib/addClass';
 ```
 
 ## API
@@ -64,6 +64,7 @@ ownerWindow: (node: Element) => Object;
 contains: (context: Element, node: Element) => boolean;
 scrollLeft: (node: Element) => number;
 scrollTop: (node: Element) => number;
+isFocusable: (node: Element) => boolean;
 ```
 
 Utils

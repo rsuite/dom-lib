@@ -1,5 +1,5 @@
-import UserAgent from './utils/UserAgent_DEPRECATED';
-import isEventSupported from './utils/isEventSupported';
+import UserAgent from './UserAgent';
+import isEventSupported from './isEventSupported';
 
 // Reasonable defaults
 const PIXEL_STEP = 10;

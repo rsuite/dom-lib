@@ -1,4 +1,4 @@
-import { camelize } from '../utils/stringFormatter';
+import { camelize } from './stringFormatter';
 
 const msPattern = /^ms-/;
 

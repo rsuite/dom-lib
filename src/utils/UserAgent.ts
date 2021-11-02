@@ -116,6 +116,9 @@ function populate(): null {
   }
 }
 
+/**
+ * @deprecated
+ */
 const UserAgent = {
   /**
    *  Check if the UA is Internet Explorer.
