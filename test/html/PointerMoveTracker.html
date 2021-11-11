@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PointerMoveTracker</title>
+  </head>
+  <body>
+    <div style="height: 1000px">
+      <button id="btn">drag me</button>
+      <hr />
+      <div id="drag-target">
+        <p>drag me (fail)</p>
+      </div>
+
+      <div id="touch-target">
+        <p>touch me</p>
+      </div>
+    </div>
+
+    <script type="module">
+      import PointerMoveTracker from '../../lib/esm/PointerMoveTracker.js';
+      const handleDragMove = (x, y, e) => {
+        console.log(e instanceof TouchEvent ? 'TouchEvent:' : 'MouseEvent:', x, y);
+      };
+      let tracker = null;
+      const handleDragEnd = e => {
+        console.log('end');
+        tracker.releaseMoves();
+        tracker = null;
+      };
+
+      function handleStart(e) {
+        console.log('start');
+        if (!tracker) {
+          tracker = new PointerMoveTracker(document.body, {
+            onMove: handleDragMove,
+            onMoveEnd: handleDragEnd
+          });
+          tracker.captureMoves(e);
+        }
+      }
+
+      document.getElementById('btn').addEventListener('touchstart', handleStart);
+      document.getElementById('btn').addEventListener('mousedown', handleStart);
+    </script>
+  </body>
+</html>

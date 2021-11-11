@@ -15,6 +15,10 @@ module.exports = (api, options) => {
     ['@babel/plugin-transform-runtime', { useESModules: !modules }]
   ];
 
+  if (NODE_ENV !== 'test') {
+    plugins.push('babel-plugin-add-import-extension');
+  }
+
   if (modules) {
     plugins.push('add-module-exports');
   }

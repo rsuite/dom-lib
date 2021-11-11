@@ -3,6 +3,7 @@ export { default as on } from './on';
 export { default as off } from './off';
 export { default as WheelHandler } from './WheelHandler';
 export { default as DOMMouseMoveTracker } from './DOMMouseMoveTracker';
+export { default as PointerMoveTracker } from './PointerMoveTracker';
 
 /** classNames */
 export { default as addClass } from './addClass';
