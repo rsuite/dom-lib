@@ -97,4 +97,30 @@ describe('Query', () => {
       expect(lib.isFocusable(createElement('div', { tabIndex: -1 }))).to.equal(true);
     });
   });
+
+  describe('getContainer', () => {
+    it('Should return the container if present', () => {
+      const container = {};
+
+      expect(lib.getContainer(container)).to.equal(container);
+    });
+
+    it('Should return the return value of container when container is a function', () => {
+      const container = {};
+
+      expect(lib.getContainer(() => container)).to.equal(container);
+    });
+
+    it('Should return defaultContainer if container is null', () => {
+      const defaultContainer = {};
+
+      expect(lib.getContainer(null, defaultContainer)).to.equal(defaultContainer);
+    });
+
+    it('Should return defaultContainer if container returns null', () => {
+      const defaultContainer = {};
+
+      expect(lib.getContainer(() => null, defaultContainer)).to.equal(defaultContainer);
+    });
+  });
 });
