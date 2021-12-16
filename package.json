@@ -1,6 +1,6 @@
 {
   "name": "dom-lib",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "DOM helper library",
   "main": "lib/cjs/index.js",
   "module": "lib/esm/index.js",
