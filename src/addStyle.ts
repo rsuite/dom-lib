@@ -5,7 +5,7 @@ export interface CSSProperty {
   [key: string]: string | number;
 }
 
-export default (node: Element, property: string | CSSProperty, value?: string | number): void => {
+export default (node: Element, property: string | Partial<CSSProperty>, value?: string | number): void => {
   let css = '';
   let props = property;
 
