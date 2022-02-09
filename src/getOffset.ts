@@ -9,7 +9,7 @@ type Offset = {
   width: number;
 };
 
-export default (node: Element): Offset | DOMRect | null => {
+export default (node: Element | null): Offset | DOMRect | null => {
   const doc = ownerDocument(node);
   const win = getWindow(doc);
   const docElem = doc && doc.documentElement;
@@ -30,7 +30,7 @@ export default (node: Element): Offset | DOMRect | null => {
     return box;
   }
 
-  if (node.getBoundingClientRect !== undefined) {
+  if (node?.getBoundingClientRect !== undefined) {
     box = node.getBoundingClientRect();
   }
 
