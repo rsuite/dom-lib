@@ -13,7 +13,7 @@ const BACKFACE_VISIBILITY = getVendorPrefixedName('backfaceVisibility');
 
 export interface Options {
   enable3DTransform?: boolean;
-  forceUse3DTransform?: boolean;
+  forceUseTransform?: boolean;
 }
 
 const defaultConfig = { enable3DTransform: true };
@@ -39,8 +39,8 @@ const appendTranslate3d = (style: CSSStyleDeclaration, x = 0, y = 0) => {
 };
 
 export const getTranslateDOMPositionXY = (conf: Options = defaultConfig) => {
-  if (conf.forceUse3DTransform) {
-    return appendTranslate3d;
+  if (conf.forceUseTransform) {
+    return conf.enable3DTransform ? appendTranslate3d : appendTranslate;
   }
 
   if (BrowserSupportCore.hasCSSTransforms()) {
