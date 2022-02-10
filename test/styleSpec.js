@@ -1,4 +1,5 @@
-import { getStyle, removeStyle, addStyle } from '../src';
+import { getStyle, removeStyle, addStyle, translateDOMPositionXY } from '../src';
+import { getTranslateDOMPositionXY } from '../src/translateDOMPositionXY';
 
 describe('Style', () => {
   beforeEach(() => {
@@ -6,14 +7,14 @@ describe('Style', () => {
   });
 
   describe('getStyle', () => {
-    it('should return complete style text', () => {
+    it('Should return complete style text', () => {
       const el = document.getElementById('case-1');
       const style = getStyle(el);
       expect(style.color).to.contain('rgb(255, 0, 0)');
       expect(style.marginLeft).to.contain('1px');
     });
 
-    it('should return style value of specific property', () => {
+    it('Should return style value of specific property', () => {
       const el = document.getElementById('case-1');
       const color = getStyle(el, 'color');
       expect(color).to.contain('rgb(255, 0, 0)');
@@ -21,7 +22,7 @@ describe('Style', () => {
   });
 
   describe('addStyle', () => {
-    it('should add a single style property with specific value', () => {
+    it('Should add a single style property with specific value', () => {
       const el = document.getElementById('case-2');
       addStyle(el, 'color', '#ffffff');
 
@@ -29,7 +30,7 @@ describe('Style', () => {
       expect(style.color).to.contain('rgb(255, 255, 255)');
     });
 
-    it('should add multiple style properties with specific values', () => {
+    it('Should add multiple style properties with specific values', () => {
       const el = document.getElementById('case-2');
       addStyle(el, {
         background: '#ff0000',
@@ -43,7 +44,7 @@ describe('Style', () => {
   });
 
   describe('removeStyle', () => {
-    it('should remove a single style property', () => {
+    it('Should remove a single style property', () => {
       const el = document.getElementById('case-3');
       removeStyle(el, 'color');
       const style = getStyle(el);
@@ -51,7 +52,7 @@ describe('Style', () => {
       expect(style.background).to.contain('rgb(255, 0, 0)');
     });
 
-    it('should remove multiple style properties', () => {
+    it('Should remove multiple style properties', () => {
       const el = document.getElementById('case-3');
       removeStyle(el, ['margin-left', 'margin-right']);
 
@@ -59,6 +60,35 @@ describe('Style', () => {
       expect(style.marginLeft).to.be.empty;
       expect(style.marginRight).to.be.empty;
       expect(style.background).to.contain('rgb(255, 0, 0)');
+    });
+  });
+
+  describe('translateDOMPositionXY', () => {
+    it('Should use translate3d by default', () => {
+      const style = {};
+      translateDOMPositionXY(style, 10, 20);
+
+      expect(style.transform).to.contain('translate3d(10px,20px,0)');
+      expect(style.backfaceVisibility).to.contain('hidden');
+    });
+
+    it('Should be disable translate3d', () => {
+      const translateDOMPositionXY = getTranslateDOMPositionXY({ enable3DTransform: false });
+      const style = {};
+      translateDOMPositionXY(style, 10, 20);
+
+      expect(style.transform).to.contain('translate(10px,20px)');
+    });
+
+    it('Should be forced to use translate3d', () => {
+      const translateDOMPositionXY = getTranslateDOMPositionXY({
+        forceUse3DTransform: true
+      });
+      const style = {};
+      translateDOMPositionXY(style, 10, 20);
+
+      expect(style.transform).to.contain('translate3d(10px,20px,0)');
+      expect(style.backfaceVisibility).to.contain('hidden');
     });
   });
 });
