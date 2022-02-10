@@ -13,9 +13,36 @@ const BACKFACE_VISIBILITY = getVendorPrefixedName('backfaceVisibility');
 
 export interface Options {
   enable3DTransform?: boolean;
+  forceUse3DTransform?: boolean;
 }
 
-export const getTranslateDOMPositionXY = (conf: Options = { enable3DTransform: true }) => {
+const defaultConfig = { enable3DTransform: true };
+
+const appendLeftAndTop = (style: CSSStyleDeclaration, x = 0, y = 0) => {
+  style.left = `${x}px`;
+  style.top = `${y}px`;
+
+  return style;
+};
+
+const appendTranslate = (style: CSSStyleDeclaration, x = 0, y = 0) => {
+  style[TRANSFORM] = `translate(${x}px,${y}px)`;
+
+  return style;
+};
+
+const appendTranslate3d = (style: CSSStyleDeclaration, x = 0, y = 0) => {
+  style[TRANSFORM] = `translate3d(${x}px,${y}px,0)`;
+  style[BACKFACE_VISIBILITY] = 'hidden';
+
+  return style;
+};
+
+export const getTranslateDOMPositionXY = (conf: Options = defaultConfig) => {
+  if (conf.forceUse3DTransform) {
+    return appendTranslate3d;
+  }
+
   if (BrowserSupportCore.hasCSSTransforms()) {
     const ua = g.window ? g.window.navigator.userAgent : 'UNKNOWN';
     const isSafari = /Safari\//.test(ua) && !/Chrome\//.test(ua);
@@ -25,27 +52,13 @@ export const getTranslateDOMPositionXY = (conf: Options = { enable3DTransform: t
     // (see bug https://bugs.webkit.org/show_bug.cgi?id=61824).
     // Use 2D translation instead.
     if (!isSafari && BrowserSupportCore.hasCSS3DTransforms() && conf.enable3DTransform) {
-      return (style: CSSStyleDeclaration, x = 0, y = 0) => {
-        style[TRANSFORM] = `translate3d(${x}px,${y}px,0)`;
-        style[BACKFACE_VISIBILITY] = 'hidden';
-
-        return style;
-      };
+      return appendTranslate3d;
     }
 
-    return (style: CSSStyleDeclaration, x = 0, y = 0) => {
-      style[TRANSFORM] = `translate(${x}px,${y}px)`;
-
-      return style;
-    };
+    return appendTranslate;
   }
 
-  return (style: CSSStyleDeclaration, x = 0, y = 0) => {
-    style.left = `${x}px`;
-    style.top = `${y}px`;
-
-    return style;
-  };
+  return appendLeftAndTop;
 };
 
 const translateDOMPositionXY = getTranslateDOMPositionXY();
