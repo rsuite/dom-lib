@@ -16,8 +16,7 @@
     "lint": "eslint src/**/*.ts",
     "test": "npm run lint &&  karma start --single-run",
     "prepublishOnly": "npm run build",
-    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
-    "semantic-release": "semantic-release"
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s"
   },
   "author": "Simon Guo <simonguo.2009@gmail.com>",
   "license": "MIT",
@@ -87,5 +86,19 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.16.0"
+  },
+  "release": {
+    "tagFormat": "${version}",
+    "plugins": [
+      "@semantic-release/commit-analyzer",
+      "@semantic-release/release-notes-generator",
+      "@semantic-release/github",
+      [
+        "@semantic-release/npm",
+        {
+          "pkgRoot": "lib"
+        }
+      ]
+    ]
   }
 }
