@@ -1,6 +1,6 @@
 {
   "name": "dom-lib",
-  "version": "3.0.1",
+  "version": "0.0.0-development",
   "description": "DOM helper library",
   "main": "lib/cjs/index.js",
   "module": "lib/esm/index.js",
@@ -16,13 +16,14 @@
     "lint": "eslint src/**/*.ts",
     "test": "npm run lint &&  karma start --single-run",
     "prepublishOnly": "npm run build",
-    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s"
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
+    "semantic-release": "semantic-release"
   },
   "author": "Simon Guo <simonguo.2009@gmail.com>",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git@github.com:rsuite/dom-lib.git"
+    "url": "https:git@github.com:rsuite/dom-lib.git"
   },
   "files": [
     "CHANGELOG.md",
@@ -75,6 +76,7 @@
     "karma-webpack": "^4.0.0-beta.0",
     "mocha": "^3.2.0",
     "prettier": "^2.2.1",
+    "semantic-release": "^19.0.2",
     "simulant": "^0.2.2",
     "sinon": "^2.1.0",
     "sinon-chai": "^2.9.0",
