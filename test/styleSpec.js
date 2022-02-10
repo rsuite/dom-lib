@@ -82,13 +82,25 @@ describe('Style', () => {
 
     it('Should be forced to use translate3d', () => {
       const translateDOMPositionXY = getTranslateDOMPositionXY({
-        forceUse3DTransform: true
+        forceUseTransform: true,
+        enable3DTransform: true
       });
       const style = {};
       translateDOMPositionXY(style, 10, 20);
 
       expect(style.transform).to.contain('translate3d(10px,20px,0)');
       expect(style.backfaceVisibility).to.contain('hidden');
+    });
+
+    it('Should be forced to use translate3d', () => {
+      const translateDOMPositionXY = getTranslateDOMPositionXY({
+        forceUseTransform: true,
+        enable3DTransform: false
+      });
+      const style = {};
+      translateDOMPositionXY(style, 10, 20);
+
+      expect(style.transform).to.contain('translate(10px,20px)');
     });
   });
 });
