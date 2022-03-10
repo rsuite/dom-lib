@@ -12,6 +12,7 @@
     "build": "npm run build:gulp && npm run build:types",
     "build:gulp": "gulp build --gulpfile scripts/gulpfile.js",
     "build:types": "npx tsc --emitDeclarationOnly --outDir lib/cjs && npx tsc --emitDeclarationOnly --outDir lib/esm",
+    "docs:generate": "typedoc src/index.ts",
     "tdd": "karma start",
     "lint": "eslint src/**/*.ts",
     "test": "npm run lint &&  karma start --single-run",
@@ -80,6 +81,7 @@
     "sinon": "^2.1.0",
     "sinon-chai": "^2.9.0",
     "style-loader": "^0.13.1",
+    "typedoc": "^0.22.13",
     "typescript": "^4.1.3",
     "webpack": "^4.27.1",
     "webpack-cli": "^3.1.2"
