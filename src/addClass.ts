@@ -1,6 +1,8 @@
 import hasClass from './hasClass';
 
 /**
+ * Adds specific class to a given element
+ *
  * @param target The element to add class to
  * @param className The class to be added
  *
