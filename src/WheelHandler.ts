@@ -2,6 +2,15 @@ import emptyFunction from './utils/emptyFunction';
 import normalizeWheel from './utils/normalizeWheel';
 import requestAnimationFramePolyfill from './requestAnimationFramePolyfill';
 
+const swapWheelAxis = normalizedEvent => {
+  return {
+    spinX: normalizedEvent.spinY,
+    spinY: normalizedEvent.spinX,
+    pixelX: normalizedEvent.pixelY,
+    pixelY: normalizedEvent.pixelX
+  };
+};
+
 class WheelHandler {
   animationFrameID = null;
   deltaX = 0;
@@ -40,7 +49,13 @@ class WheelHandler {
   }
 
   onWheel(event) {
-    const normalizedEvent = normalizeWheel(event);
+    let normalizedEvent = normalizeWheel(event);
+
+    // on some platforms (e.g. Win10), browsers do not automatically swap deltas for horizontal scroll
+    if (navigator.platform !== 'MacIntel' && event.shiftKey) {
+      normalizedEvent = swapWheelAxis(normalizedEvent);
+    }
+
     const deltaX = this.deltaX + normalizedEvent.pixelX;
     const deltaY = this.deltaY + normalizedEvent.pixelY;
     const handleScrollX = this.handleScrollX(deltaX, deltaY);
