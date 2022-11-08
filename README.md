@@ -1,6 +1,9 @@
-# dom-lib [![npm][npm-badge]][npm]
+# DOM helper library
 
-DOM helper library
+[![CI](https://github.com/rsuite/dom-lib/workflows/Node.js%20CI/badge.svg)](https://github.com/rsuite/dom-lib/actions)
+[![NPM Version](https://img.shields.io/npm/v/dom-lib?color=33cd56&logo=npm)](https://www.npmjs.com/package/dom-lib)
+
+Click the "Exports" link in the sidebar to see a complete list of everything in the package.
 
 ## Install
 
@@ -12,6 +15,9 @@ npm install dom-lib --save
 
 ```js
 import addClass from 'dom-lib/addClass';
+
+addClass(element, 'foo');
+// output: <div class="foo"></div>
 ```
 
 ## API
@@ -70,9 +76,9 @@ isFocusable: (node: Element) => boolean;
 Utils
 
 ```typescript
-scrollLeft: (node: Element, val: number) => void;
+scrollLeft: (node: Element)=> number;
+scrollLeft: (node: Element, val: number)=> void;
+
+scrollTop: (node: Element)=> number;
 scrollTop: (node: Element, val: number) => void;
 ```
-
-[npm-badge]: https://badge.fury.io/js/dom-lib.svg
-[npm]: http://badge.fury.io/js/dom-lib

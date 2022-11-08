@@ -2,7 +2,12 @@ import ownerDocument from './ownerDocument';
 import nodeName from './nodeName';
 import getStyle from './getStyle';
 
-export default (node: Element): Element => {
+/**
+ * Get the offset parent of a DOM element
+ * @param node The DOM element
+ * @returns The offset parent of the DOM element
+ */
+export default function getOffsetParent(node: Element): Element {
   const doc = ownerDocument(node);
   let offsetParent: Element = (node as HTMLElement)?.offsetParent;
 
@@ -15,4 +20,4 @@ export default (node: Element): Element => {
   }
 
   return offsetParent || doc.documentElement;
-};
+}

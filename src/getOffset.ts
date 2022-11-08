@@ -2,14 +2,19 @@ import ownerDocument from './ownerDocument';
 import getWindow from './getWindow';
 import contains from './contains';
 
-type Offset = {
+export type Offset = {
   top: number;
   left: number;
   height: number;
   width: number;
 };
 
-export default (node: Element | null): Offset | DOMRect | null => {
+/**
+ * Get the offset of a DOM element
+ * @param node The DOM element
+ * @returns The offset of the DOM element
+ */
+export default function getOffset(node: Element | null): Offset | DOMRect | null {
   const doc = ownerDocument(node);
   const win = getWindow(doc);
   const docElem = doc && doc.documentElement;
@@ -44,4 +49,4 @@ export default (node: Element | null): Offset | DOMRect | null => {
   }
 
   return box;
-};
+}
