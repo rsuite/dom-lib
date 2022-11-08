@@ -11,6 +11,9 @@ const swapWheelAxis = normalizedEvent => {
   };
 };
 
+/**
+ * Used to handle scrolling trackpad and mouse wheel events.
+ */
 class WheelHandler {
   animationFrameID = null;
   deltaX = 0;
@@ -48,6 +51,10 @@ class WheelHandler {
     this.onWheel = this.onWheel.bind(this);
   }
 
+  /**
+   * Binds the wheel handler.
+   * @param event The wheel event.
+   */
   onWheel(event) {
     let normalizedEvent = normalizeWheel(event);
 
@@ -81,6 +88,9 @@ class WheelHandler {
     }
   }
 
+  /**
+   * Fires a callback if the wheel event has changed.
+   */
   didWheel() {
     this.animationFrameID = null;
     this.onWheelCallback(this.deltaX, this.deltaY);

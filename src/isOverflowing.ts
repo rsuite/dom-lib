@@ -13,11 +13,16 @@ function bodyIsOverflowing(node) {
   return false;
 }
 
-export default (container: Element) => {
+/**
+ * Check if the document is overflowing and account for the scrollbar width
+ * @param container The container to check
+ * @returns The document is overflowing
+ */
+export default function isOverflowing(container: Element) {
   const win = getWindow(container);
   const isBody = container && container.tagName.toLowerCase() === 'body';
 
   return win || isBody
     ? bodyIsOverflowing(container)
     : container.scrollHeight > container.clientHeight;
-};
+}

@@ -12,8 +12,14 @@ const fallback = (context: Element, node: (Node & ParentNode) | null) => {
   return false;
 };
 
-// HTML DOM and SVG DOM may have different support levels,
-// so we need to check on context instead of a document root element.
+/**
+ * Checks if an element contains another given element.
+ *
+ * @param context The context element
+ * @param node The element to check
+ * @returns  `true` if the given element is contained, `false` otherwise
+ */
+
 const contains = (context: Element, node: (Node & ParentNode) | null) => {
   if (!node) return false;
 
