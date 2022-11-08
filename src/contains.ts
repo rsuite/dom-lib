@@ -19,7 +19,6 @@ const fallback = (context: Element, node: (Node & ParentNode) | null) => {
  * @param node The element to check
  * @returns  `true` if the given element is contained, `false` otherwise
  */
-
 const contains = (context: Element, node: (Node & ParentNode) | null) => {
   if (!node) return false;
 
