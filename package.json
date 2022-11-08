@@ -91,7 +91,7 @@
     "webpack-cli": "^3.1.2"
   },
   "dependencies": {
-    "@babel/runtime": "^7.16.0"
+    "@babel/runtime": "^7.19.0"
   },
   "release": {
     "tagFormat": "${version}",
