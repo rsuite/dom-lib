@@ -1,16 +1,9 @@
 import getOffsetParent from './getOffsetParent';
-import getOffset from './getOffset';
+import getOffset, { Offset } from './getOffset';
 import getStyle from './getStyle';
 import scrollTop from './scrollTop';
 import scrollLeft from './scrollLeft';
 import nodeName from './nodeName';
-
-type Offset = {
-  top: number;
-  left: number;
-  height: number;
-  width: number;
-};
 
 /**
  * Get the position of a DOM element

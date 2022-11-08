@@ -2,7 +2,7 @@ import ownerDocument from './ownerDocument';
 import getWindow from './getWindow';
 import contains from './contains';
 
-type Offset = {
+export type Offset = {
   top: number;
   left: number;
   height: number;

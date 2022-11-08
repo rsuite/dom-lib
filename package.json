@@ -8,6 +8,10 @@
   "directories": {
     "lib": "cjs/"
   },
+  "keywords": [
+    "dom-library",
+    "dom"
+  ],
   "scripts": {
     "build": "npm run build:gulp && npm run build:types",
     "build:gulp": "gulp build --gulpfile scripts/gulpfile.js",
