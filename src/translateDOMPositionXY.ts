@@ -12,11 +12,10 @@ const TRANSFORM = getVendorPrefixedName('transform');
 const BACKFACE_VISIBILITY = getVendorPrefixedName('backfaceVisibility');
 
 export interface Options {
+  enableTransform?: boolean;
   enable3DTransform?: boolean;
   forceUseTransform?: boolean;
 }
-
-const defaultConfig = { enable3DTransform: true };
 
 const appendLeftAndTop = (style: CSSStyleDeclaration, x = 0, y = 0) => {
   style.left = `${x}px`;
@@ -38,12 +37,13 @@ const appendTranslate3d = (style: CSSStyleDeclaration, x = 0, y = 0) => {
   return style;
 };
 
-export const getTranslateDOMPositionXY = (conf: Options = defaultConfig) => {
-  if (conf.forceUseTransform) {
+export const getTranslateDOMPositionXY = (conf?: Options) => {
+  const { enableTransform = true, enable3DTransform = true, forceUseTransform } = conf || {};
+  if (forceUseTransform) {
     return conf.enable3DTransform ? appendTranslate3d : appendTranslate;
   }
 
-  if (BrowserSupportCore.hasCSSTransforms()) {
+  if (BrowserSupportCore.hasCSSTransforms() && enableTransform) {
     const ua = g.window ? g.window.navigator.userAgent : 'UNKNOWN';
     const isSafari = /Safari\//.test(ua) && !/Chrome\//.test(ua);
 
@@ -51,7 +51,7 @@ export const getTranslateDOMPositionXY = (conf: Options = defaultConfig) => {
     // of GPU-accelerated layers
     // (see bug https://bugs.webkit.org/show_bug.cgi?id=61824).
     // Use 2D translation instead.
-    if (!isSafari && BrowserSupportCore.hasCSS3DTransforms() && conf.enable3DTransform) {
+    if (!isSafari && BrowserSupportCore.hasCSS3DTransforms() && enable3DTransform) {
       return appendTranslate3d;
     }
 

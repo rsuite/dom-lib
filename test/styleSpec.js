@@ -102,5 +102,15 @@ describe('Style', () => {
 
       expect(style.transform).to.contain('translate(10px,20px)');
     });
+    it('Should be use position', () => {
+      const translateDOMPositionXY = getTranslateDOMPositionXY({
+        enableTransform: false
+      });
+      const style = {};
+      translateDOMPositionXY(style, 10, 20);
+
+      expect(style.left).to.contain('10px');
+      expect(style.top).to.contain('20px');
+    });
   });
 });
