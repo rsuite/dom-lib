@@ -7,6 +7,9 @@ interface PointerMoveTrackerOptions {
   onMoveEnd: (event: MouseEvent | TouchEvent) => void;
 }
 
+/**
+ * Track mouse/touch events for a given element.
+ */
 export default class PointerMoveTracker {
   isDragStatus = false;
   useTouchEvent = true;

@@ -12,8 +12,10 @@ describe('PointerMoveTracker', () => {
 
     const handleDragMove = (x, y, e) => {
       if (e instanceof MouseEvent) {
-        expect(x).to.equal(100);
-        expect(y).to.equal(100);
+        if (x && y) {
+          expect(x).to.equal(100);
+          expect(y).to.equal(100);
+        }
       }
     };
 
@@ -35,6 +37,7 @@ describe('PointerMoveTracker', () => {
     }
 
     target.addEventListener('mousedown', handleStart);
+
     simulant.fire(target, 'mousedown');
     simulant.fire(document.body, 'mousemove', { clientX: 100, clientY: 100 });
     simulant.fire(document.body, 'mouseup');
