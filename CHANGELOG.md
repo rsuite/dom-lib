@@ -1,3 +1,12 @@
+## [3.0.1](https://github.com/rsuite/dom-lib/compare/3.0.0...3.0.1) (2021-12-16)
+
+
+### Bug Fixes
+
+* **getContainer:** container can be null ([#27](https://github.com/rsuite/dom-lib/issues/27)) ([121ac6d](https://github.com/rsuite/dom-lib/commit/121ac6dec305d0c9193e5e65e31274520595fcde))
+
+
+
 # [3.0.0](https://github.com/rsuite/dom-lib/compare/2.1.0...3.0.0) (2021-11-02)
 
 

@@ -2,7 +2,12 @@ import canUseDOM from './canUseDOM';
 
 let size;
 
-export default (recalc?: boolean): number | void => {
+/**
+ * Returns the size of the scrollbar.
+ * @param recalc Force recalculation.
+ * @returns The size of the scrollbar.
+ */
+export default function getScrollbarSize(recalc?: boolean): number | void {
   if (size === undefined || recalc) {
     if (canUseDOM) {
       const scrollDiv = document.createElement('div');
@@ -21,4 +26,4 @@ export default (recalc?: boolean): number | void => {
   }
 
   return size;
-};
+}

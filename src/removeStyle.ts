@@ -1,14 +1,16 @@
-function removeStyle(node: Element, key: string) {
+function _removeStyle(node: Element, key: string) {
   (node as HTMLElement).style?.removeProperty?.(key);
 }
 
 /**
- * key(s) typeof [string , array] ?
+ * Remove a style property from a DOM element
+ * @param node The DOM element
+ * @param keys key(s) typeof [string , array]
  */
-export default (node: Element, keys: string | Array<string>) => {
+export default function removeStyle(node: Element, keys: string | Array<string>) {
   if (typeof keys === 'string') {
-    removeStyle(node, keys);
+    _removeStyle(node, keys);
   } else if (Array.isArray(keys)) {
-    keys.forEach(key => removeStyle(node, key));
+    keys.forEach(key => _removeStyle(node, key));
   }
-};
+}

@@ -7,6 +7,17 @@ import on from './on';
 import cancelAnimationFramePolyfill from './cancelAnimationFramePolyfill';
 import requestAnimationFramePolyfill from './requestAnimationFramePolyfill';
 
+/**
+ * Mouse drag tracker, get the coordinate value where the mouse moves in time.
+ *
+ * ```typescript
+ * const tracker = new DOMMouseMoveTracker(
+ *   onMove:(deltaX: number, deltaY: number, moveEvent: Object) => void,
+ *   onMoveEnd:() => void,
+ *   container: HTMLElement
+ * );
+ * ```
+ */
 class DOMMouseMoveTracker {
   isDraggingStatus = false;
   animationFrameID = null;

@@ -44,13 +44,20 @@ describe('Query', () => {
     expect(200).to.equal($('#case-4').scrollLeft());
   });
 
-  it('should check for contained element', () => {
-    const el4 = document.getElementById('case-4');
-    const el5 = document.getElementById('case-5');
-    const el6 = document.getElementById('case-6');
+  describe('contains(context, node)', () => {
+    it('should check for contained element', () => {
+      const el4 = document.getElementById('case-4');
+      const el5 = document.getElementById('case-5');
+      const el6 = document.getElementById('case-6');
 
-    expect(lib.contains(el5, el4)).to.equal(false);
-    expect(lib.contains(el5, el6)).to.equal(true);
+      expect(lib.contains(el5, el4)).to.equal(false);
+      expect(lib.contains(el5, el6)).to.equal(true);
+    });
+
+    it('should return false if node is null', () => {
+      const el4 = document.getElementById('case-4');
+      expect(lib.contains(el4, null)).to.be.false;
+    });
   });
 
   it('should container with offset', () => {
@@ -95,6 +102,32 @@ describe('Query', () => {
       expect(lib.isFocusable(createElement('div', { contentEditable: true }))).to.equal(true);
       expect(lib.isFocusable(createElement('div', { tabIndex: 0 }))).to.equal(true);
       expect(lib.isFocusable(createElement('div', { tabIndex: -1 }))).to.equal(true);
+    });
+  });
+
+  describe('getContainer', () => {
+    it('Should return the container if present', () => {
+      const container = {};
+
+      expect(lib.getContainer(container)).to.equal(container);
+    });
+
+    it('Should return the return value of container when container is a function', () => {
+      const container = {};
+
+      expect(lib.getContainer(() => container)).to.equal(container);
+    });
+
+    it('Should return defaultContainer if container is null', () => {
+      const defaultContainer = {};
+
+      expect(lib.getContainer(null, defaultContainer)).to.equal(defaultContainer);
+    });
+
+    it('Should return defaultContainer if container returns null', () => {
+      const defaultContainer = {};
+
+      expect(lib.getContainer(() => null, defaultContainer)).to.equal(defaultContainer);
     });
   });
 });

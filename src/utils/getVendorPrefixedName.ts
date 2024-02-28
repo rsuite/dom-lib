@@ -33,7 +33,7 @@ function getVendorPrefixedName(property: string) {
     }
     memoized[name] = name in testStyle ? name : getWithPrefix(capitalizedName);
   }
-  return memoized[name];
+  return memoized[name] || name;
 }
 
 export default getVendorPrefixedName;

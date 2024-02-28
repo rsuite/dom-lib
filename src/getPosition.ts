@@ -1,22 +1,22 @@
 import getOffsetParent from './getOffsetParent';
-import getOffset from './getOffset';
+import getOffset, { Offset } from './getOffset';
 import getStyle from './getStyle';
 import scrollTop from './scrollTop';
 import scrollLeft from './scrollLeft';
 import nodeName from './nodeName';
 
-type Offset = {
-  top: number;
-  left: number;
-  height: number;
-  width: number;
-};
-
-export default (
+/**
+ * Get the position of a DOM element
+ * @param node  The DOM element
+ * @param offsetParent  The offset parent of the DOM element
+ * @param calcMargin  Whether to calculate the margin
+ * @returns  The position of the DOM element
+ */
+export default function getPosition(
   node: Element,
   offsetParent?: Element,
   calcMargin = true
-): Offset | DOMRect | null => {
+): Offset | DOMRect | null {
   const parentOffset = {
     top: 0,
     left: 0
@@ -61,4 +61,4 @@ export default (
   }
 
   return null;
-};
+}

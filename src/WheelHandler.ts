@@ -2,6 +2,18 @@ import emptyFunction from './utils/emptyFunction';
 import normalizeWheel from './utils/normalizeWheel';
 import requestAnimationFramePolyfill from './requestAnimationFramePolyfill';
 
+const swapWheelAxis = normalizedEvent => {
+  return {
+    spinX: normalizedEvent.spinY,
+    spinY: normalizedEvent.spinX,
+    pixelX: normalizedEvent.pixelY,
+    pixelY: normalizedEvent.pixelX
+  };
+};
+
+/**
+ * Used to handle scrolling trackpad and mouse wheel events.
+ */
 class WheelHandler {
   animationFrameID = null;
   deltaX = 0;
@@ -39,8 +51,18 @@ class WheelHandler {
     this.onWheel = this.onWheel.bind(this);
   }
 
+  /**
+   * Binds the wheel handler.
+   * @param event The wheel event.
+   */
   onWheel(event) {
-    const normalizedEvent = normalizeWheel(event);
+    let normalizedEvent = normalizeWheel(event);
+
+    // on some platforms (e.g. Win10), browsers do not automatically swap deltas for horizontal scroll
+    if (navigator.platform !== 'MacIntel' && event.shiftKey) {
+      normalizedEvent = swapWheelAxis(normalizedEvent);
+    }
+
     const deltaX = this.deltaX + normalizedEvent.pixelX;
     const deltaY = this.deltaY + normalizedEvent.pixelY;
     const handleScrollX = this.handleScrollX(deltaX, deltaY);
@@ -66,6 +88,9 @@ class WheelHandler {
     }
   }
 
+  /**
+   * Fires a callback if the wheel event has changed.
+   */
   didWheel() {
     this.animationFrameID = null;
     this.onWheelCallback(this.deltaX, this.deltaY);
