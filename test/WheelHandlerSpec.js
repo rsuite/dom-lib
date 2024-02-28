@@ -34,6 +34,7 @@ describe('WheelHandler', () => {
       true,
       true
     );
+
     wheelHandler.onWheel(mockEvent);
   });
 
