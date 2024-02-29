@@ -2,7 +2,7 @@ import on from './on';
 import isEventSupported from './utils/isEventSupported';
 
 interface PointerMoveTrackerOptions {
-  useTouchEvent: boolean;
+  useTouchEvent?: boolean;
   onMove: (x: number, y: number, event: MouseEvent | TouchEvent) => void;
   onMoveEnd: (event: MouseEvent | TouchEvent) => void;
 }
@@ -63,13 +63,13 @@ export default class PointerMoveTracker {
    */
   captureMoves(event) {
     if (!this.eventMoveToken && !this.eventUpToken) {
-      this.eventMoveToken = on(this.domNode, 'mousemove', this.onDragMove);
-      this.eventUpToken = on(this.domNode, 'mouseup', this.onDragUp);
-
       if (this.isSupportTouchEvent()) {
         this.eventMoveToken = on(this.domNode, 'touchmove', this.onDragMove, { passive: false });
         this.eventUpToken = on(this.domNode, 'touchend', this.onDragUp, { passive: false });
         on(this.domNode, 'touchcancel', this.releaseMoves);
+      } else {
+        this.eventMoveToken = on(this.domNode, 'mousemove', this.onDragMove);
+        this.eventUpToken = on(this.domNode, 'mouseup', this.onDragUp);
       }
     }
 
@@ -81,7 +81,9 @@ export default class PointerMoveTracker {
       this.y = this.getClientY(event);
     }
 
-    event.preventDefault();
+    if (event.cancelable) {
+      event.preventDefault();
+    }
   }
 
   /**
@@ -135,7 +137,10 @@ export default class PointerMoveTracker {
     this.y = y;
 
     this.moveEvent = event;
-    event.preventDefault();
+
+    if (event.cancelable) {
+      event.preventDefault();
+    }
   };
 
   didDragMove = () => {
