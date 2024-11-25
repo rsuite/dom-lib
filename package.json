@@ -78,7 +78,7 @@
     "karma-safari-launcher": "^1.0.0",
     "karma-sinon-chai": "^1.2.2",
     "karma-sourcemap-loader": "^0.3.7",
-    "karma-webpack": "^4.0.0-beta.0",
+    "karma-webpack": "^5.0.1",
     "mocha": "^10.1.0",
     "prettier": "^2.2.1",
     "semantic-release": "^19.0.2",
